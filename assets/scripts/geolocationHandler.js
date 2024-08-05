@@ -16,6 +16,25 @@ document.addEventListener('click', requestGeolocation);
 
 // Functions //
 
+function writeLatitudeLongitude(){
+
+  if(geolocationWrapper.location != null){
+    const location = geolocationWrapper.location.coords;
+  
+    const locationElement = document.createElement('div');
+  
+    const latitudeElement = document.createElement('h3');
+    latitudeElement.innerText = `Latitude: ${location.latitude}`;
+    locationElement.appendChild(latitudeElement);
+    
+    const longitudeElement = document.createElement('h3');
+    longitudeElement.innerText = `Longitude: ${location.longitude}`;
+    locationElement.appendChild(longitudeElement);
+  
+    geolocationButton.insertAdjacentElement('afterend', locationElement);
+  }
+}
+
 function requestGeolocation(event) {
   // Confirm event source is geolocation button
   if(event.target.id == 'get-geolocation'){
@@ -25,6 +44,7 @@ function requestGeolocation(event) {
       navigator.geolocation.getCurrentPosition((position) => {
         geolocationWrapper.grantedLocationPermission = true;
         geolocationWrapper.location = position;
+        writeLatitudeLongitude();
       });
     } 
     else {
