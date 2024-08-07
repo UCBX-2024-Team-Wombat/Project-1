@@ -16,9 +16,6 @@ function wrapWordDefinition(wordDefinition){}
 
 function writeDefinitionsToPage(wordDefinitionWrappers){}
 
-function storeWordInfoApiKey(apiKey) {}
-
-function getWordInfoApiKey() {}
 
 /* 
 File Explaination (To Delete):
