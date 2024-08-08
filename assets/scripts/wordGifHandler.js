@@ -1,26 +1,52 @@
 // Variables
-
+const localStorageKeyName = 'project-1-giphy-api-key';
+const giphyBaseURL = 'https://api.giphy.com/v1/gifs/search?';
+let gifEmbedLink;
 
 // Functions
 function fetchWordGif(word){
+
   console.log(`Fetching gif for ${word}`);
 
-  fetchGifListFromAPI(word)
-  .then( gifs => {
-    // get random gif from among gifs
-    const gif = '';
-    writeGifToPage(gif);
-  })
-
+  fetchGifListFromAPI(word);
 }
 
-function fetchGifListFromAPI(word){}
+function fetchGifListFromAPI(word){
 
-function writeGifToPage(gif){}
+  const queryString = giphyBaseURL + new URLSearchParams({
+    api_key: getGiphyApiKey(),
+    q: word,
+    limit: 25,
+    rating: 'pg-13',
+    lang: 'en'
+  }).toString();
 
-/* 
-File Explaination (To Delete):
+  fetch(queryString)
+    .then( response => {
+      return response.json();
+    })
+    .then( function(data) {
+      const availableGifEmbedLinks = []
 
-This file is responsible for collecting and returning a gif from the searched word
+      for(const gif of data.data){
+        availableGifEmbedLinks.push(gif.embed_url);
+      }
 
-*/
+      gifEmbedLink = availableGifEmbedLinks[getRandomInteger(availableGifEmbedLinks.length)];
+    })
+}
+
+// source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random 
+function getRandomInteger(items){
+  return Math.floor(Math.random() * items);
+}
+
+function storeGiphyApiKey(apiKey) {
+  localStorage.setItem(localStorageKeyName, apiKey);
+}
+
+function getGiphyApiKey() {
+  return localStorage.getItem(localStorageKeyName);
+}
+
+function writeGifToPage(){}
