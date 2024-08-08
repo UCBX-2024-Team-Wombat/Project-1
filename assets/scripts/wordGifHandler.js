@@ -5,11 +5,11 @@ const giphyBaseURL = 'https://api.giphy.com/v1/gifs/search?';
 // Functions
 function fetchWordGif(word){
 
-
-
   console.log(`Fetching gif for ${word}`);
 
-  fetchGifListFromAPI(word);
+  const gifEmbedLink = fetchGifListFromAPI(word);
+
+  console.log('gifEmbedLink: '+gifEmbedLink);
 }
 
 function fetchGifListFromAPI(word){
@@ -29,12 +29,20 @@ function fetchGifListFromAPI(word){
       return response.json();
     })
     .then( function(data) {
-      console.log(data);
+      const availableGifs = []
+
       for(const gif of data.data){
-        console.log(gif.embed_url);
+        availableGifs.push(gif.embed_url);
       }
+
+      return availableGifs[getRandomInteger(availableGifs.length)];
     })
 
+}
+
+// source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random 
+function getRandomInteger(items){
+  return Math.floor(Math.random() * items);
 }
 
 function storeGiphyApiKey(apiKey) {
