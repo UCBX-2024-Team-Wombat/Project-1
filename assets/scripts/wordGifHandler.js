@@ -9,36 +9,29 @@ function fetchWordGif(word){
 
   console.log(`Fetching gif for ${word}`);
 
-  fetchGifListFromAPI(word)
-  // .then( gifs => {
-  //   // get random gif from among gifs
-  //   const gif = '';
-  //   writeGifToPage(gif);
-  // })
-
+  fetchGifListFromAPI(word);
 }
 
 function fetchGifListFromAPI(word){
 
   const queryString = giphyBaseURL + new URLSearchParams({
     api_key: getGiphyApiKey(),
-    q: word
-    // limit: 25,
-    // rating: 'pg-13',
-    // lang: 'en'
+    q: word,
+    limit: 25,
+    rating: 'pg-13',
+    lang: 'en'
   }).toString();
 
   console.log('queryString: '+queryString);
 
   fetch(queryString)
     .then( response => {
-      console.log('response: ');
-      console.log(response);
       return response.json();
     })
     .then( function(data) {
-      console.log('data:');
-      console.log(data);
+      for(const gif in data.data){
+        console.log(gif.embed_url);
+      }
     })
 
 }
