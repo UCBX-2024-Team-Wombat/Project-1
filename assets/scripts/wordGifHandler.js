@@ -1,15 +1,14 @@
 // Variables
 const localStorageKeyName = 'project-1-giphy-api-key';
 const giphyBaseURL = 'https://api.giphy.com/v1/gifs/search?';
+let gifEmbedLink;
 
 // Functions
 function fetchWordGif(word){
 
   console.log(`Fetching gif for ${word}`);
 
-  const gifEmbedLink = fetchGifListFromAPI(word);
-
-  console.log('gifEmbedLink: '+gifEmbedLink);
+  fetchGifListFromAPI(word);
 }
 
 function fetchGifListFromAPI(word){
@@ -29,15 +28,14 @@ function fetchGifListFromAPI(word){
       return response.json();
     })
     .then( function(data) {
-      const availableGifs = []
+      const availableGifEmbedLinks = []
 
       for(const gif of data.data){
-        availableGifs.push(gif.embed_url);
+        availableGifEmbedLinks.push(gif.embed_url);
       }
 
-      return availableGifs[getRandomInteger(availableGifs.length)];
+      gifEmbedLink = availableGifEmbedLinks[getRandomInteger(availableGifEmbedLinks.length)];
     })
-
 }
 
 // source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random 
