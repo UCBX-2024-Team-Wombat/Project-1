@@ -21,8 +21,6 @@ function fetchGifListFromAPI(word){
     lang: 'en'
   }).toString();
 
-  console.log('queryString: '+queryString);
-
   fetch(queryString)
     .then( response => {
       return response.json();
@@ -51,13 +49,4 @@ function getGiphyApiKey() {
   return localStorage.getItem(localStorageKeyName);
 }
 
-// 4HdVzdGUtpYeFDMICwxKrXIaoXamfPZY
-
-function writeGifToPage(gif){}
-
-/* 
-File Explaination (To Delete):
-
-This file is responsible for collecting and returning a gif from the searched word
-
-*/
+function writeGifToPage(){}
