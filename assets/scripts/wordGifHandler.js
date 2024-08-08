@@ -31,9 +31,8 @@ function fetchGifListFromAPI(word){
     .then( response => {
       return response.json();
     })
-    .then( response => {
-      console.log(response);
-      
+    .then( function(data) {
+      console.log(data);
     })
 
 }
