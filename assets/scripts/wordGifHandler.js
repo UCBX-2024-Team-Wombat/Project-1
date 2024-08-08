@@ -30,7 +30,7 @@ function fetchGifListFromAPI(word){
     })
     .then( function(data) {
       console.log(data);
-      for(const i = 0; i < data.data.length; i++){
+      for(const gif of data.data){
         console.log(gif[i]['embed_url']);
       }
     })
