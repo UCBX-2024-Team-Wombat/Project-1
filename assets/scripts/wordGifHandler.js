@@ -20,18 +20,24 @@ function fetchWordGif(word){
 
 function fetchGifListFromAPI(word){
 
-  fetch(giphyBaseURL + new URLSearchParams({
+  const queryString = giphyBaseURL + new URLSearchParams({
     api_key: getGiphyApiKey(),
-    q: word,
-    limit: 25,
-    rating: 'pg-13',
-    lang: 'en'
-  }).toString()
-)
+    q: word
+    // limit: 25,
+    // rating: 'pg-13',
+    // lang: 'en'
+  }).toString();
+
+  console.log('queryString: '+queryString);
+
+  fetch(queryString)
     .then( response => {
+      console.log('response: ');
+      console.log(response);
       return response.json();
     })
     .then( function(data) {
+      console.log('data:');
       console.log(data);
     })
 
