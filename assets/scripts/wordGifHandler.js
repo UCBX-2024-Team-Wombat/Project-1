@@ -31,7 +31,7 @@ function fetchGifListFromAPI(word){
     .then( function(data) {
       console.log(data);
       for(const gif of data.data){
-        console.log(gif[i]['embed_url']);
+        console.log(gif.embed_url);
       }
     })
 
