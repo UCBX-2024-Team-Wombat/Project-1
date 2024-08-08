@@ -29,6 +29,7 @@ function fetchGifListFromAPI(word){
       return response.json();
     })
     .then( function(data) {
+      console.log(data);
       for(const gif in data.data){
         console.log(gif.embed_url);
       }
