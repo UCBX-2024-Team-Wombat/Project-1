@@ -1,6 +1,6 @@
 // Variables
-const localStorageKeyName = 'project-1-giphy-api-key?';
-const giphyBaseURL = 'api.giphy.com/v1/gifs/search';
+const localStorageKeyName = 'project-1-giphy-api-key';
+const giphyBaseURL = 'api.giphy.com/v1/gifs/search?';
 
 // Functions
 function fetchWordGif(word){
