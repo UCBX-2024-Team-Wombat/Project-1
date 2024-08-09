@@ -29,8 +29,8 @@ function fetchWordInfo(word) {
           // retrieve word type, not within hwi object
           const wordType = wordInfo.fl[0];
           // in the case of homographs, wordInfo should be the first word (most relevant)
-          const pronunciation = wordInfo.hwi.prs[0].wod; // wod = word of the day MW format
-          const wordAudio = wordInfo.hwi.prs[1].wod;
+          const pronunciation = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
+          const wordAudio = wordInfo.hwi.prs[0].sound.audio;
           const etymology = wordInfo.et[0];
           const wordSentence = wordInfo.vis[0];
 
