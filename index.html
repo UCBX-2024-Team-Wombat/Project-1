@@ -17,19 +17,30 @@
                 </div>
             </div>
         </header>
-        <div class="modal">
-            <div class="modal-background"></div>
-            <div class="modal-content">
-                <div>Hello modal</div>
-              <!-- Any other Bulma elements you want -->
-            </div>
-            <button class="modal-close is-large" aria-label="close"></button>
+      //  <div class="modal">
+       //     <div class="modal-background"></div>
+         //   <div class="modal-content">
+            //    <div>Hello modal</div>
+          //    <!-- Any other Bulma elements you want -->
+        //    </div>
+          //  <button class="modal-close is-large" aria-label="close"></button>
+          //</div>
+          <div class="container is-flex">
+          <div class="sidebar">
+              <div class="card">
+                  <div class="card-content">
+                      <p class="title is-5">Filler Text</p>
+                      <input class="input" type="text" placeholder="Word Input">
+                      <button id="search" class="button is-primary mt-3">Search</button>
+                    //i will move it down box  <button id="relatedWordsBtn" class="button is-primary mt-3">Show Related Words</button>
+                  </div>
+              </div>
           </div>
-        <section>
+          <section>
             <label for="searched-word">Type a word here</label>
             <input type="text" id="searched-word"></input>
-            <button id="search">Search</button>
-            <button id="relatedWordsBtn">Show Related Words</button>
+           
+    
             <div id="relatedWordsModal" class="modal">
                 <div class="modal-content">
                     <span id="closeModal" class="close">&times;</span>
