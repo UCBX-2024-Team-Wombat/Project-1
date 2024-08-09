@@ -53,11 +53,8 @@ function fetchWordInfo(word) {
 /*
         saveWordToStorage(wordObj);
         createWordCard(word);
-
-
  */
-
-        return wordObj;
+        return wordArray;
       }
     })
     .catch(function (error) {
