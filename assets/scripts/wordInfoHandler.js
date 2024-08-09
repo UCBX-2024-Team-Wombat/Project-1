@@ -40,7 +40,11 @@ function fetchWordInfo(word) {
               wordObj['wordAudio'] = wordInfo.hwi.prs[0].sound.audio;
             }
           }
-          wordObj['etymology'] = wordInfo.et[0];
+
+          if('et' in wordInfo) {
+            wordObj["etymology"] = wordInfo.et[0];
+
+          }
           // const wordSentence = wordInfo.def.sseq[0].vis[0];
 
           wordArray.push(wordObj);
