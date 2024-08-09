@@ -1,7 +1,7 @@
 // Variables
 
 const searchInputEl = document.querySelector('#search-input');
-const searchBtn = document.querySelector('#search');
+const searchBtn = document.getElementById('search');
 const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
 
 // Functions
