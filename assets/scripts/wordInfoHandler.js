@@ -1,7 +1,7 @@
 // Variables
 
 const searchInputEl = document.querySelector('#search-input');
-const searchFormEl = document.querySelector('#search-form');
+const searchBtn = document.querySelector('#search');
 const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
 
 // Functions
@@ -143,7 +143,7 @@ function handleSearchSubmit(event) {
 
 }
 
-searchFormEl.addEventListener('submit', handleSearchSubmit);
+searchBtn.addEventListener('click', handleSearchSubmit);
 
 // request URL: https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=948a3ec4-0862-47ce-bf63-b217e7cbcc75
 
