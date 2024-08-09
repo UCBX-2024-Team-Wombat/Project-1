@@ -129,13 +129,13 @@ separate pronunciation objects), sound ("audio" member is only required member) 
 //
 
 
-function handleSearchSubmit(event) {
-  event.preventDefault();
+// function handleSearchSubmit(event) {
+//   event.preventDefault();
 
-  const searchInputVal = searchInputEl.value;
-  fetchWordInfo(searchInputVal);
+//   const searchInputVal = searchInputEl.value;
+//   fetchWordInfo(searchInputVal);
 
-}
+// }
 
 // searchBtn.addEventListener('click', handleSearchSubmit);
 

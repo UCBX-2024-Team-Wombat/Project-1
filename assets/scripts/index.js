@@ -7,7 +7,8 @@ searchButton.addEventListener('click', handleSearch)
 // Functions
 function handleSearch(event){
   const searchedWord = document.getElementById('searched-word').value;
-  fetchWordInfo(searchedWord);
+  const wordInfo = fetchWordInfo(searchedWord);
+  console.log(wordInfo);
   fetchWordFrequency(searchedWord);
   fetchWordGif(searchedWord);
 }
