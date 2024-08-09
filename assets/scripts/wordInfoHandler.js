@@ -23,26 +23,26 @@ function fetchWordInfo(word) {
         console.log(`No Results Found! Try Again.`);
       } else {
         const wordArray = [];
+
         for(const wordInfo of wordData) {
+          const wordObj = {};
           //using API language for constant names so I can track what's what
-          const headword = wordInfo.hwi.hw;
+          wordObj['headword'] = wordInfo.hwi.hw;
           // retrieve word type, not within hwi object
-          const wordType = wordInfo.fl[0];
+          wordObj['wordType'] = wordInfo.fl[0];
           // in the case of homographs, wordInfo should be the first word (most relevant)
-          const pronunciation = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
-          const wordAudio = wordInfo.hwi.prs[0].sound.audio;
-          const etymology = wordInfo.et[0];
+
+          if('prs' in wordInfo.hwi) {
+            if('mw' in wordInfo.hwi.prs) {
+              wordObj['pronunciation'] = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
+            }
+            if('sound' in wordInfo.hwi.prs) {
+              wordObj['wordAudio'] = wordInfo.hwi.prs[0].sound.audio;
+            }
+          }
+          wordObj['etymology'] = wordInfo.et[0];
           // const wordSentence = wordInfo.def.sseq[0].vis[0];
 
-          // create word object based on API elements
-          const wordObj = {
-            word: headword, // JSON: hwi
-            type: wordType, // JSON: fl, functional label (verb, adj, etc.)
-            pronunc: pronunciation, //JSON: prs array within the hwi object
-            audio: wordAudio, // see notes
-            etym: etymology, // JSON: et, array; ["text", string] is required
-            // example: wordSentence, // JSON: vis, sentence examples
-          };
           wordArray.push(wordObj);
         };
 
@@ -50,13 +50,6 @@ function fetchWordInfo(word) {
         saveWordToStorage(wordObj);
         createWordCard(word);
 
-       //test output
-        console.log(headword);
-        console.log(wordType);
-        console.log(pronunciation);
-        console.log(wordAudio);
-        console.log(etymology);
-        console.log(wordSentence);
 
  */
 
