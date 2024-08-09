@@ -5,10 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>HTML 5 Boilerplate</title>
+        <title>Box Model Layout with Bulma</title>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <body>
+        <header class="site-header has-background-primary">
+            <div class="container is-flex is-justify-content-space-between is-align-items-center">
+                <div class="logo">
+                    <h1 class="title has-text-white">Site Title</h1>
+                </div>
+            </div>
+        </header>
         <div class="modal">
             <div class="modal-background"></div>
             <div class="modal-content">
@@ -17,9 +25,6 @@
             </div>
             <button class="modal-close is-large" aria-label="close"></button>
           </div>
-          
-        <header class="site-header">
-            site header
         <section>
             <label for="searched-word">Type a word here</label>
             <input type="text" id="searched-word"></input>
