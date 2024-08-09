@@ -8,10 +8,23 @@
         <link rel="stylesheet" href="assets/css/style.css">
     </head>
     <body>
+       
+        <header class="site-header">
+            site header
         <section>
             <label for="searched-word">Type a word here</label>
             <input type="text" id="searched-word"></input>
             <button id="search">Search</button>
+            <button id="relatedWordsBtn">Show Related Words</button>
+            <div id="relatedWordsModal" class="modal">
+                <div class="modal-content">
+                    <span id="closeModal" class="close">&times;</span>
+                    <h2>Related Words</h2>
+                    <ul id="relatedWordsList">
+                        //we need to link our words here
+                    </ul>
+                </div>
+            </div>
         </section>
         <script src="assets/scripts/wordInfoHandler.js"></script>
         <script src="assets/scripts/wordGifHandler.js"></script>
