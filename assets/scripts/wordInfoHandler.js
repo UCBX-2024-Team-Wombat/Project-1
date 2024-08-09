@@ -50,10 +50,8 @@ function fetchWordInfo(word) {
           wordArray.push(wordObj);
         };
 
-/*
-        saveWordToStorage(wordObj);
-        createWordCard(word);
- */
+        console.log(wordArray);
+
         return wordArray;
       }
     })
