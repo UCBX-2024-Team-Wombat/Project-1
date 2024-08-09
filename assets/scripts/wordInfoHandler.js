@@ -143,7 +143,7 @@ function handleSearchSubmit(event) {
 
 }
 
-searchBtn.addEventListener('click', handleSearchSubmit);
+// searchBtn.addEventListener('click', handleSearchSubmit);
 
 // request URL: https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=948a3ec4-0862-47ce-bf63-b217e7cbcc75
 
