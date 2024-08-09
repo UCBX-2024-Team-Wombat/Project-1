@@ -32,7 +32,7 @@ function fetchWordInfo(word) {
           const pronunciation = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
           const wordAudio = wordInfo.hwi.prs[0].sound.audio;
           const etymology = wordInfo.et[0];
-          const wordSentence = wordInfo.vis[0];
+          // const wordSentence = wordInfo.def.sseq[0].vis[0];
 
           // create word object based on API elements
           const wordObj = {
@@ -41,7 +41,7 @@ function fetchWordInfo(word) {
             pronunc: pronunciation, //JSON: prs array within the hwi object
             audio: wordAudio, // see notes
             etym: etymology, // JSON: et, array; ["text", string] is required
-            example: wordSentence, // JSON: vis, sentence examples
+            // example: wordSentence, // JSON: vis, sentence examples
           };
           wordArray.push(wordObj);
         };
@@ -95,7 +95,7 @@ function createWordCard(word) {
 
   const wordSentence = document.createElement('div');
   wordSentence.classList.add('word-sentence');
-  wordSentence.textContent = word.example;
+  // wordSentence.textContent = word.example;
 
   // append each word element to the word card
   wordCard.appendChild(wordName); 
