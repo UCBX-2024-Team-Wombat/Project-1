@@ -19,7 +19,7 @@ function fetchWordInfo(word) {
       return response.json();
     })
     .then(function (wordData) {  //should this param be "word"?
-      if (!wordInfo) {
+      if (!wordData) {
         console.log(`No Results Found! Try Again.`);
       } else {
         const wordArray = [];
