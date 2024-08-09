@@ -1,24 +1,151 @@
 // Variables
 
+const searchInputEl = document.querySelector('#search-input');
+const searchFormEl = document.querySelector('#search-form');
+const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
 
 // Functions
+/** Should I change the parameter to searchInputEl? It's used on line 135 */
 function fetchWordInfo(word) {
-  console.log(`Fetching info for ${word}`);
-  fetchDataFromAPI(word)
-  .then((wordDefinitionWrappers) => {
-    writeDefinitionsToPage(wordDefinitionWrappers);
-  });
+  //set the URL for the fetch function
+  const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`;
+
+  fetch(url)
+    .then(function (response) {
+      if (!response.ok) {
+        throw response.json();
+      }
+
+      return response.json();
+    })
+    .then(function (wordData) {  //should this param be "word"?
+      if (!wordInfo) {
+        console.log(`No Results Found! Try Again.`);
+      } else {
+        const wordArray = [];
+        for(const wordInfo of wordData) {
+          //using API language for constant names so I can track what's what
+          const headword = wordInfo.hwi.hw;
+          // retrieve word type, not within hwi object
+          const wordType = wordInfo.fl[0];
+          // in the case of homographs, wordInfo should be the first word (most relevant)
+          const pronunciation = wordInfo.hwi.prs[0].wod; // wod = word of the day MW format
+          const wordAudio = wordInfo.hwi.prs[1].wod;
+          const etymology = wordInfo.et[0];
+          const wordSentence = wordInfo.vis[0];
+
+          // create word object based on API elements
+          const wordObj = {
+            word: headword, // JSON: hwi
+            type: wordType, // JSON: fl, functional label (verb, adj, etc.)
+            pronunc: pronunciation, //JSON: prs array within the hwi object
+            audio: wordAudio, // see notes
+            etym: etymology, // JSON: et, array; ["text", string] is required
+            example: wordSentence, // JSON: vis, sentence examples
+          };
+          wordArray.push(wordObj);
+        };
+
+/*
+        saveWordToStorage(wordObj);
+        createWordCard(word);
+
+       //test output
+        console.log(headword);
+        console.log(wordType);
+        console.log(pronunciation);
+        console.log(wordAudio);
+        console.log(etymology);
+        console.log(wordSentence);
+
+ */
+
+        return wordObj;
+      }
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
 }
 
-function fetchDataFromAPI(word){}
+function createWordCard(word) {
+  const wordCard = document.createElement('div');
+  wordCard.classList.add('word-card');
 
-function wrapWordDefinition(wordDefinition){}
+  const wordName = document.createElement('div');
+  wordName.classList.add('word-name');
+  wordName.textContent = word.word;
 
-function writeDefinitionsToPage(wordDefinitionWrappers){}
+  const wordType = document.createElement("div");
+  wordType.classList.add("word-type");
+  wordType.textContent = word.type;
 
-function storeWordInfoApiKey(apiKey) {}
+  const wordPronunciation = document.createElement('div');
+  wordPronunciation.classList.add('word-pronunciation');
+  wordPronunciation.textContent = word.pronunc;
 
-function getWordInfoApiKey() {}
+  const wordAudioPronunciation = document.createElement('div');
+  wordAudioPronunciation.classList.add('word-audio-pronunciation');
+  wordAudioPronunciation.textContent = word.audio;
+
+
+  const wordEtymology = document.createElement('div');
+  wordEtymology.classList.add('word-etymology');
+  wordEtymology.textContent = word.etym;
+
+  const wordSentence = document.createElement('div');
+  wordSentence.classList.add('word-sentence');
+  wordSentence.textContent = word.example;
+
+  // append each word element to the word card
+  wordCard.appendChild(wordName); 
+  wordCard.appendChild(wordPronunciation);
+  wordCard.appendChild(wordAudioPronunciation);
+  wordCard.appendChild(wordType);
+  wordCard.appendChild(wordEtymology);
+  wordCard.appendChild(wordSentence);  
+
+  // append word card to the HTML box/element
+  const wordInfoDiv = document.getElementById("word-info");
+  wordInfoDiv.appendChild(wordCard);
+
+  return wordCard;
+
+}
+
+// not sure if this needs to be here
+// function renderWordInfo() {
+//   createWordCard();
+// }
+
+function saveWordToStorage(wordInfo) {
+  localStorage.setItem("wordInfo", JSON.stringify(wordInfo));
+}
+
+
+/* "hom #"" is for homonyms (homographs). For headword, try to restrict to 
+the main/first definition (JSON: "hom":1 ) */
+/* headword and pronunciation (text, audio) are stored in hwi object
+https://dictionaryapi.com/products/json#sec-1 */
+/* audio reference URL: https://media.merriam-webster.com/audio/prons/[language_code]/[country_code]/[format]/[subdirectory]/[base filename].[format]  */
+/* prs array objects include mw (Merriam-Webster written pronunciation), pun (to
+separate pronunciation objects), sound ("audio" member is only required member)  */
+/* vis: Array of the form ["vis", [{object}]] where object is "t" : string */
+
+//
+
+
+function handleSearchSubmit(event) {
+  event.preventDefault();
+
+  const searchInputVal = searchInputEl.value;
+  fetchWordInfo(searchInputVal);
+
+}
+
+searchFormEl.addEventListener('submit', handleSearchSubmit);
+
+// request URL: https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=948a3ec4-0862-47ce-bf63-b217e7cbcc75
 
 /* 
 File Explaination (To Delete):
