@@ -1,59 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>HTML 5 Boilerplate</title>
-        <title>Box Model Layout with Bulma</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
-        <link rel="stylesheet" href="assets/css/style.css">
-    </head>
-    <body>
-        <header class="site-header has-background-primary">
-            <div class="container is-flex is-justify-content-space-between is-align-items-center">
-                <div class="logo">
-                    <h1 class="title has-text-white">Site Title</h1>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <title>Box Model Layout with Bulma</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+    <header class="site-header has-background-primary">
+        <div class="container is-flex is-justify-content-space-between is-align-items-center">
+            <div class="logo">
+                <h1 class="title has-text-white">Site Title</h1>
+            </div>
+        </div>
+    </header>
+    <div class="container is-flex">
+        <div class="sidebar">
+            <div class="card">
+                <div class="card-content">
+                    <p class="title is-5">Filler Text</p>
+                    <input class="input" type="text" placeholder="Word Input">
+                    <button id="search" class="button is-primary mt-3">Search</button>
                 </div>
             </div>
-        </header>
-      //  <div class="modal">
-       //     <div class="modal-background"></div>
-         //   <div class="modal-content">
-            //    <div>Hello modal</div>
-          //    <!-- Any other Bulma elements you want -->
-        //    </div>
-          //  <button class="modal-close is-large" aria-label="close"></button>
-          //</div>
-          <div class="container is-flex">
-          <div class="sidebar">
-              <div class="card">
-                  <div class="card-content">
-                      <p class="title is-5">Filler Text</p>
-                      <input class="input" type="text" placeholder="Word Input">
-                      <button id="search" class="button is-primary mt-3">Search</button>
-                    //i will move it down box  <button id="relatedWordsBtn" class="button is-primary mt-3">Show Related Words</button>
-                  </div>
-              </div>
-          </div>
-          <section>
-            <label for="searched-word">Type a word here</label>
-            <input type="text" id="searched-word"></input>
-           
-    
-            <div id="relatedWordsModal" class="modal">
-                <div class="modal-content">
-                    <span id="closeModal" class="close">&times;</span>
-                    <h2>Related Words</h2>
-                    <ul id="relatedWordsList">
-                        //we need to link our words here
-                    </ul>
-                </div>
+        </div>
+        <button id="relatedWordsBtn" class="button is-primary mt-3">Show Related Words</button>
+        <div class="card mt-3">
+            <div class="card-content">
+                <p class="title is-5">Gif</p>
+                <!-- You can insert an actual GIF or image here -->
             </div>
-        </section>
-        <script src="assets/scripts/wordInfoHandler.js"></script>
-        <script src="assets/scripts/wordGifHandler.js"></script>
-        <script src="assets/scripts/wordFrequencyHandler.js"></script>
-        <script src="assets/scripts/index.js"></script>
-    </body>
+        </div>
+    </div>
+
+    <section>
+        <label for="searched-word">Type a word here</label>
+        <input type="text" id="searched-word"></input>
+
+
+        <div id="relatedWordsModal" class="modal">
+            <div class="modal-content">
+                <span id="closeModal" class="close">&times;</span>
+                <h2>Related Words</h2>
+                <ul id="relatedWordsList">
+                    //we need to link our words here
+                </ul>
+            </div>
+        </div>
+    </section>
+    <script src="assets/scripts/wordInfoHandler.js"></script>
+    <script src="assets/scripts/wordGifHandler.js"></script>
+    <script src="assets/scripts/wordFrequencyHandler.js"></script>
+    <script src="assets/scripts/index.js"></script>
+</body>
+
 </html>
