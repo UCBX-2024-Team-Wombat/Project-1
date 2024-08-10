@@ -1,20 +1,20 @@
 // Variables
-const searchButton = document.getElementById('search');
+const searchInput = document.getElementById("searched-word");
+const searchButton = document.getElementById("search");
 
 // Execution
-searchButton.addEventListener('click', handleSearch)
+searchButton.addEventListener("click", handleSearch);
 
 // Functions
-function handleSearch(event){
-  const searchedWord = document.getElementById('searched-word').value;
-  // fetchWordInfo(searchedWord);
+function handleSearch(event) {
+  resetPage();
+  const searchedWord = searchInput.value;
   fetchRelatedWords(searchedWord);
   fetchWordGif(searchedWord);
 }
 
-/* 
-File Explaination (To Delete):
-
-This file will serve as a sort of traffic-light/director for the other javascript files, as well as 
-handling responsibilities not covered by other files (adding event listeners, opening/closing modals)
-*/
+// Reset page elements between new word searches
+function resetPage() {
+  resetModal();
+  resetGif();
+}
