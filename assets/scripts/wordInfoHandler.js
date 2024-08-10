@@ -73,7 +73,7 @@ function getDefinitions(wordInfo, wordObj){
           for (const arrayValue of sseqWrapperArray) {
             if (typeof arrayValue === "object") {
               for (const dtWrapper of arrayValue["dt"]) {
-                wordObj.defintion.push(dtWrapper[1]);
+                wordObj.definition.push(dtWrapper[1]);
               }
             }
           }
