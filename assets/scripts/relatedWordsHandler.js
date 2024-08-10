@@ -25,6 +25,10 @@ function populateModalContent(data){
   const synonyms = data.synonyms;
   const antonyms = data.antonyms;
 
+  if(synonyms.length == 0 && antonyms.length == 0){
+    // modalDisplayElement.innerText = f`Sorry, we couldn't find any synonyms or antonyms for ${data.word}`;
+  }
+
   // Handle modal population once modal is built
 }
 
