@@ -1,11 +1,11 @@
 // Variables
 
-const searchInputEl = document.querySelector("#search-input");
-const searchBtn = document.getElementById("search");
+const searchInputEl = document.getElementById('searched-word');
+const searchBtn = document.getElementById('search');
 const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
 
 // Functions
-/** Should I change the parameter to searchInputEl? It's used on line 135 */
+
 function fetchWordInfo(word) {
   //set the URL for the fetch function
   const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`;
@@ -13,17 +13,25 @@ function fetchWordInfo(word) {
   fetch(url)
     .then(function (response) {
       if (!response.ok) {
-        throw response.json();
+        throw response.json();             
       }
 
       return response.json();
     })
     .then(function (wordData) {
+      // const wordWithoutAsterisks = wordData.hwi.hw.replace(/\*/gi, "");
      
-      if (wordData.hwi.hw.includes("*")) {
-        const wordWithoutAsterisks = wordData.hwi.hw.replace(/\*/gi, "");
-        console.log(wordWithoutAsterisks); //not printing to console
+      if (wordData === undefined || wordData === null) {
+        //abandoned if condition: wordData.hwi.hw.includes('*')
+
+        console.log(`'${word}' not found. Please check spelling and try again.`); 
+        //not printing to console
         //separate function for error handling??
+        const wordNotFound = document.getElementById("results");
+        wordNotFound.innerHTML =
+          "<h3>No results found! Please check spelling and try again.</h3>";
+
+
       } else {
         const wordArray = [];
 
@@ -160,27 +168,6 @@ function createWordCard(word) {
 function saveWordToStorage(wordInfo) {
   localStorage.setItem("wordInfo", JSON.stringify(wordInfo));
 }
-
-/* "hom #"" is for homonyms (homographs). For headword, try to restrict to 
-the main/first definition (JSON: "hom":1 ) */
-/* headword and pronunciation (text, audio) are stored in hwi object
-https://dictionaryapi.com/products/json#sec-1 */
-/* audio reference URL: https://media.merriam-webster.com/audio/prons/[language_code]/[country_code]/[format]/[subdirectory]/[base filename].[format]  */
-/* prs array objects include mw (Merriam-Webster written pronunciation), pun (to
-separate pronunciation objects), sound ("audio" member is only required member)  */
-/* vis: Array of the form ["vis", [{object}]] where object is "t" : string */
-
-//
-
-// function handleSearchSubmit(event) {
-//   event.preventDefault();
-
-//   const searchInputVal = searchInputEl.value;
-//   fetchWordInfo(searchInputVal);
-
-// }
-
-// searchBtn.addEventListener('click', handleSearchSubmit);
 
 // request URL: https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=948a3ec4-0862-47ce-bf63-b217e7cbcc75
 
