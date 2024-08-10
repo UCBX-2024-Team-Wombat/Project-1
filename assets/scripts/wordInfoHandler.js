@@ -20,14 +20,15 @@ function fetchWordInfo(word) {
     })
     .then(function (wordData) {
       // const wordWithoutAsterisks = wordData.hwi.hw.replace(/\*/gi, "");
-     
-      if (wordData === undefined || wordData === null) {
-        //abandoned if condition: wordData.hwi.hw.includes('*')
+    //  in this section, we need to remove asterisks from the hw data
+      if (!(word in wordData)) {
+        // this message does not print to the console. The array does.
+        console.log("ERROR"); 
 
-        console.log(`'${word}' not found. Please check spelling and try again.`); 
-        //not printing to console
-        //separate function for error handling??
         const wordNotFound = document.getElementById("results");
+        wordNotFound.style.fontStyle = "bold";
+        wordNotFound.style.fontSize = "24px";
+        wordNotFound.style.color = "red";
         wordNotFound.innerHTML =
           "<h3>No results found! Please check spelling and try again.</h3>";
 
@@ -66,6 +67,7 @@ function fetchWordInfo(word) {
         }
 
         console.log(wordArray);
+        saveWordToStorage(wordArray);
 
         return wordArray;
       }
