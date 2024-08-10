@@ -66,13 +66,13 @@ function getDefinitions(wordInfo, wordObj){
   
   wordObj.definition = [];
 
-  for (const definitionWrapper in wordInfo.def) {
+  for (const definitionWrapper of wordInfo.def) {
     if ("sseq" in definitionWrapper) {
-      for (const sseqWrapper in definitionWrapper.sseq) {
-        for (const sseqWrapperArray in sseqWrapper) {
-          for (const arrayValue in sseqWrapperArray) {
+      for (const sseqWrapper of definitionWrapper.sseq) {
+        for (const sseqWrapperArray of sseqWrapper) {
+          for (const arrayValue of sseqWrapperArray) {
             if (typeof arrayValue === "object") {
-              for (const dtWrapper in arrayValue["dt"]) {
+              for (const dtWrapper of arrayValue["dt"]) {
                 wordObj.defintion.push(dtWrapper[1]);
               }
             }
