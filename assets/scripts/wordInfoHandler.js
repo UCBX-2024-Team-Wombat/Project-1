@@ -67,13 +67,29 @@ function getDefinitions(wordInfo, wordObj){
   wordObj.definition = [];
 
   for (const definitionWrapper of wordInfo.def) {
+    // wordInfo.def returns an array of objects
     if ("sseq" in definitionWrapper) {
-      for (const sseqWrapper of definitionWrapper.sseq) {
-        for (const sseqWrapperArray of sseqWrapper) {
-          for (const arrayValue of sseqWrapperArray) {
-            if (typeof arrayValue === "object") {
-              for (const dtWrapper of arrayValue["dt"]) {
-                wordObj.definition.push(dtWrapper[1]);
+      // If sseq is a key in the current object, loop 
+      // through returned array values
+      for (const sseqArrayValue of definitionWrapper.sseq) {
+        // for each array value, check if that value has an array
+        // of its own. Then loop through that array 
+        // (which has a mixed array value)
+        for (const mixedValueArray of sseqArrayValue) {
+          // mixedValueArray has both strings and objects.
+          // We want the objects only
+          for (const stringOrObject of mixedValueArray) {
+            // If value is object, then loop through values
+            if (typeof stringOrObject === "object") {
+              // dt returns an array of strings.
+              // The first string is a signifier, the second
+              // is the actual definition.
+              for(const dtArrayValue of stringOrObject['dt']){
+                // If first value in dtArray is string "text",
+                // get value in second index
+                if(dtArrayValue[0] == 'text'){
+                  wordObj.definition.push(dtArrayValue[1]);
+                }
               }
             }
           }
