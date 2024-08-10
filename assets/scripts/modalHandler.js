@@ -1,7 +1,6 @@
 import { showRelatedWords } from './relatedWordsHandler.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-    // this part is to open and close modal
     function openModal($el) {
         $el.classList.add('is-active');
     }
@@ -26,6 +25,8 @@ document.addEventListener('DOMContentLoaded', () => {
             openModal($target);
         });
     });
+
+    // click event added to child elements. it will close the modal
     (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
         const $target = $close.closest('.modal');
 
@@ -34,9 +35,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // using keyboard to close all modals
     document.addEventListener('keydown', (event) => {
         if (event.key === "Escape") {
             closeAllModals();
         }
+    });
+
+    document.getElementById('relatedWordsBtn').addEventListener('click', function() {
+        const word = document.querySelector('input[type="text"]').value;
+        showRelatedWords(word);
+        document.getElementById('relatedWordsModal').classList.add('is-active');
+    });
+
+    // Handle closing the modal
+    document.querySelectorAll('.modal .delete, .modal .button').forEach(function(closeButton) {
+        closeButton.addEventListener('click', function() {
+            document.getElementById('relatedWordsModal').classList.remove('is-active');
+        });
     });
 });
