@@ -1,7 +1,7 @@
 // Variables
 
-const searchInputEl = document.querySelector('#search-input');
-const searchBtn = document.getElementById('search');
+const searchInputEl = document.querySelector("#search-input");
+const searchBtn = document.getElementById("search");
 const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
 
 // Functions
@@ -18,37 +18,39 @@ function fetchWordInfo(word) {
 
       return response.json();
     })
-    .then(function (wordData) {  //should this param be "word"?
+    .then(function (wordData) {
+      //should this param be "word"?
       if (!wordData) {
         console.log(`No Results Found! Try Again.`);
       } else {
         const wordArray = [];
 
-        for(const wordInfo of wordData) {
+        for (const wordInfo of wordData) {
           const wordObj = {};
           //using API language for constant names so I can track what's what
-          wordObj['headword'] = wordInfo.hwi.hw;
+          wordObj["headword"] = wordInfo.hwi.hw;
           // retrieve word type, not within hwi object
-          wordObj['wordType'] = wordInfo.fl[0];
+          wordObj["wordType"] = wordInfo.fl[0];
           // in the case of homographs, wordInfo should be the first word (most relevant)
 
-          if('prs' in wordInfo.hwi) {
-            if('mw' in wordInfo.hwi.prs) {
-              wordObj['pronunciation'] = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
+          if ("prs" in wordInfo.hwi) {
+            if ("mw" in wordInfo.hwi.prs) {
+              wordObj["pronunciation"] = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
             }
-            if('sound' in wordInfo.hwi.prs) {
-              wordObj['wordAudio'] = wordInfo.hwi.prs[0].sound.audio;
+            if ("sound" in wordInfo.hwi.prs) {
+              wordObj["wordAudio"] = wordInfo.hwi.prs[0].sound.audio;
             }
           }
 
-          if('et' in wordInfo) {
+          if ("et" in wordInfo) {
             wordObj["etymology"] = wordInfo.et[0];
-
           }
+
+          getDefinitions(wordInfo, wordObj)
           // const wordSentence = wordInfo.def.sseq[0].vis[0];
 
           wordArray.push(wordObj);
-        };
+        }
 
         console.log(wordArray);
 
@@ -60,49 +62,68 @@ function fetchWordInfo(word) {
     });
 }
 
-function createWordCard(word) {
-  const wordCard = document.createElement('div');
-  wordCard.classList.add('word-card');
+function getDefinitions(wordInfo, wordObj){
+  
+  wordObj.definition = [];
 
-  const wordName = document.createElement('div');
-  wordName.classList.add('word-name');
+  for (const definitionWrapper in wordInfo.def) {
+    if ("sseq" in definitionWrapper) {
+      for (const sseqWrapper in definitionWrapper.sseq) {
+        for (const sseqWrapperArray in sseqWrapper) {
+          for (const arrayValue in sseqWrapperArray) {
+            if (typeof arrayValue === "object") {
+              for (const dtWrapper in arrayValue["dt"]) {
+                wordObj.defintion.push(dtWrapper[1]);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+function createWordCard(word) {
+  const wordCard = document.createElement("div");
+  wordCard.classList.add("word-card");
+
+  const wordName = document.createElement("div");
+  wordName.classList.add("word-name");
   wordName.textContent = word.word;
 
   const wordType = document.createElement("div");
   wordType.classList.add("word-type");
   wordType.textContent = word.type;
 
-  const wordPronunciation = document.createElement('div');
-  wordPronunciation.classList.add('word-pronunciation');
+  const wordPronunciation = document.createElement("div");
+  wordPronunciation.classList.add("word-pronunciation");
   wordPronunciation.textContent = word.pronunc;
 
-  const wordAudioPronunciation = document.createElement('div');
-  wordAudioPronunciation.classList.add('word-audio-pronunciation');
+  const wordAudioPronunciation = document.createElement("div");
+  wordAudioPronunciation.classList.add("word-audio-pronunciation");
   wordAudioPronunciation.textContent = word.audio;
 
-
-  const wordEtymology = document.createElement('div');
-  wordEtymology.classList.add('word-etymology');
+  const wordEtymology = document.createElement("div");
+  wordEtymology.classList.add("word-etymology");
   wordEtymology.textContent = word.etym;
 
-  const wordSentence = document.createElement('div');
-  wordSentence.classList.add('word-sentence');
+  const wordSentence = document.createElement("div");
+  wordSentence.classList.add("word-sentence");
   // wordSentence.textContent = word.example;
 
   // append each word element to the word card
-  wordCard.appendChild(wordName); 
+  wordCard.appendChild(wordName);
   wordCard.appendChild(wordPronunciation);
   wordCard.appendChild(wordAudioPronunciation);
   wordCard.appendChild(wordType);
   wordCard.appendChild(wordEtymology);
-  wordCard.appendChild(wordSentence);  
+  wordCard.appendChild(wordSentence);
 
   // append word card to the HTML box/element
   const wordInfoDiv = document.getElementById("word-info");
   wordInfoDiv.appendChild(wordCard);
 
   return wordCard;
-
 }
 
 // not sure if this needs to be here
@@ -114,7 +135,6 @@ function saveWordToStorage(wordInfo) {
   localStorage.setItem("wordInfo", JSON.stringify(wordInfo));
 }
 
-
 /* "hom #"" is for homonyms (homographs). For headword, try to restrict to 
 the main/first definition (JSON: "hom":1 ) */
 /* headword and pronunciation (text, audio) are stored in hwi object
@@ -125,7 +145,6 @@ separate pronunciation objects), sound ("audio" member is only required member) 
 /* vis: Array of the form ["vis", [{object}]] where object is "t" : string */
 
 //
-
 
 // function handleSearchSubmit(event) {
 //   event.preventDefault();
