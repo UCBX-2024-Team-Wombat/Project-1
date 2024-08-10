@@ -19,21 +19,23 @@ function fetchWordInfo(word) {
       return response.json();
     })
     .then(function (wordData) {
-      //should this param be "word"?
-      if (!wordData) {
-        console.log(`No Results Found! Try Again.`);
+     
+      if (wordData.hwi.hw.includes("*")) {
+        const wordWithoutAsterisks = wordData.hwi.hw.replace(/\*/gi, "");
+        console.log(wordWithoutAsterisks); //not printing to console
+        //separate function for error handling??
       } else {
         const wordArray = [];
 
         for (const wordInfo of wordData) {
-          if('hom' in wordInfo){
+          if ("hom" in wordInfo) {
             const wordObj = {};
-            //using API language for constant names so I can track what's what
-            wordObj["headword"] = wordInfo.hwi.hw;
+            //hw is the API identifier for the searched word
+            wordObj["headword"] = wordInfo.hwi.hw.replace(/\*/gi, "");
             // retrieve word type, not within hwi object
             wordObj["wordType"] = wordInfo.fl[0];
             // in the case of homographs, wordInfo should be the first word (most relevant)
-  
+
             if ("prs" in wordInfo.hwi) {
               if ("mw" in wordInfo.hwi.prs) {
                 wordObj["pronunciation"] = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
@@ -42,16 +44,15 @@ function fetchWordInfo(word) {
                 wordObj["wordAudio"] = wordInfo.hwi.prs[0].sound.audio;
               }
             }
-  
+
             if ("et" in wordInfo) {
               wordObj["etymology"] = wordInfo.et[0];
             }
-  
-  
+
             getDefinitions(wordInfo, wordObj);
-  
+
             // const wordSentence = wordInfo.def.sseq[0].vis[0];
-  
+
             wordArray.push(wordObj);
           }
         }
