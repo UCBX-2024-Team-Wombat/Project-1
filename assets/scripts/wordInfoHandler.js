@@ -26,30 +26,34 @@ function fetchWordInfo(word) {
         const wordArray = [];
 
         for (const wordInfo of wordData) {
-          const wordObj = {};
-          //using API language for constant names so I can track what's what
-          wordObj["headword"] = wordInfo.hwi.hw;
-          // retrieve word type, not within hwi object
-          wordObj["wordType"] = wordInfo.fl[0];
-          // in the case of homographs, wordInfo should be the first word (most relevant)
-
-          if ("prs" in wordInfo.hwi) {
-            if ("mw" in wordInfo.hwi.prs) {
-              wordObj["pronunciation"] = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
+          if('hom' in wordInfo){
+            const wordObj = {};
+            //using API language for constant names so I can track what's what
+            wordObj["headword"] = wordInfo.hwi.hw;
+            // retrieve word type, not within hwi object
+            wordObj["wordType"] = wordInfo.fl[0];
+            // in the case of homographs, wordInfo should be the first word (most relevant)
+  
+            if ("prs" in wordInfo.hwi) {
+              if ("mw" in wordInfo.hwi.prs) {
+                wordObj["pronunciation"] = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
+              }
+              if ("sound" in wordInfo.hwi.prs) {
+                wordObj["wordAudio"] = wordInfo.hwi.prs[0].sound.audio;
+              }
             }
-            if ("sound" in wordInfo.hwi.prs) {
-              wordObj["wordAudio"] = wordInfo.hwi.prs[0].sound.audio;
+  
+            if ("et" in wordInfo) {
+              wordObj["etymology"] = wordInfo.et[0];
             }
+  
+  
+            getDefinitions(wordInfo, wordObj);
+  
+            // const wordSentence = wordInfo.def.sseq[0].vis[0];
+  
+            wordArray.push(wordObj);
           }
-
-          if ("et" in wordInfo) {
-            wordObj["etymology"] = wordInfo.et[0];
-          }
-
-          getDefinitions(wordInfo, wordObj);
-          // const wordSentence = wordInfo.def.sseq[0].vis[0];
-
-          wordArray.push(wordObj);
         }
 
         console.log(wordArray);
@@ -65,38 +69,36 @@ function fetchWordInfo(word) {
 function getDefinitions(wordInfo, wordObj) {
   wordObj.definition = [];
 
-  if('hom' in wordInfo){
-    for (const definitionWrapper of wordInfo.def) {
-      // wordInfo.def returns an array of objects
-      if ("sseq" in definitionWrapper) {
-        // If sseq is a key in the current object, loop
-        // through returned array values
-        for (const sseqArrayValue of definitionWrapper.sseq) {
-          // for each array value, check if that value has an array
-          // of its own. Then loop through that array
-          // (which has a mixed array value)
-          console.log("sseqArrayValue");
-          console.log(sseqArrayValue);
-          for (const mixedValueArray of sseqArrayValue) {
-            // mixedValueArray has both strings and objects.
-            // We want the objects only
-            console.log("mixedValueArray");
-            console.log(mixedValueArray);
-  
-            if (mixedValueArray[0] == "sense") {
-              // dt returns an array of strings.
-              // The first string is a signifier, the second
-              // is the actual definition.
-              const dt = mixedValueArray[1]["dt"];
-              console.log("dt");
-              console.log(dt);
-  
-              for (const dtArrayValue of dt) {
-                // If first value in dtArray is string "text",
-                // get value in second index
-                if (dtArrayValue[0] == "text") {
-                  wordObj.definition.push(dtArrayValue[1]);
-                }
+  for (const definitionWrapper of wordInfo.def) {
+    // wordInfo.def returns an array of objects
+    if ("sseq" in definitionWrapper) {
+      // If sseq is a key in the current object, loop
+      // through returned array values
+      for (const sseqArrayValue of definitionWrapper.sseq) {
+        // for each array value, check if that value has an array
+        // of its own. Then loop through that array
+        // (which has a mixed array value)
+        console.log("sseqArrayValue");
+        console.log(sseqArrayValue);
+        for (const mixedValueArray of sseqArrayValue) {
+          // mixedValueArray has both strings and objects.
+          // We want the objects only
+          console.log("mixedValueArray");
+          console.log(mixedValueArray);
+
+          if (mixedValueArray[0] == "sense") {
+            // dt returns an array of strings.
+            // The first string is a signifier, the second
+            // is the actual definition.
+            const dt = mixedValueArray[1]["dt"];
+            console.log("dt");
+            console.log(dt);
+
+            for (const dtArrayValue of dt) {
+              // If first value in dtArray is string "text",
+              // get value in second index
+              if (dtArrayValue[0] == "text") {
+                wordObj.definition.push(dtArrayValue[1]);
               }
             }
           }
