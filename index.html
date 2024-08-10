@@ -1,52 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>WordNerd</title>
-    <title>Box Model Layout with Bulma</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
     <header class="site-header has-background-primary">
-        <div class="container is-flex is-justify-content-space-between is-align-items-center">
-            <div class="logo">
-                <h1 class="title has-text-white">WordNerd</h1>
-            </div>
+      <div
+        class="container is-flex is-justify-content-space-between is-align-items-center"
+      >
+        <div class="logo">
+          <h1 class="title has-text-white">WordNerd</h1>
         </div>
+      </div>
     </header>
     <div class="container is-flex">
-        <div class="sidebar">
-            <div class="card">
-                <div class="card-content">
-                    <p class="title is-5">Filler Text</p>
-                    <input class="input" id="searched-word" type="text" placeholder="Word Input">
-                    <button id="search" class="button is-primary mt-3">Search</button>
-                </div>
+      <div class="sidebar">
+        <div class="card">
+          <div class="card-content">
+            <p class="title is-5">Search for a word!</p>
+            <p>
+              Type a word below and hit search. We'll return lots of fun data
+              about the word
+            </p>
+            <div>
+              <input
+                class="input mt-2"
+                id="searched-word"
+                type="text"
+                placeholder="Type here..."
+              />
+              <div id="invalid-word-notice" class="has-text-danger" hidden>
+                Invalid word. Please try another
+              </div>
+              <button id="search" class="button is-primary is-fullwidth mt-2">
+                Search
+              </button>
             </div>
-        <button id="relatedWordsBtn" class="button is-primary mt-3">Show Related Words</button>
+          </div>
+        </div>
+        <div id="modal-button-wrapper" hidden>
+          <button
+            id="related-words-modal-button"
+            class="button is-primary mt-3 is-fullwidth"
+          >
+            Show Related Words
+          </button>
+        </div>
         <div class="card mt-3">
-            <div class="card-content">
-                <p class="title is-5">Gif It!</p>
-                <div class="columns is-centered">
-                    <p id="gif-embed-slot" class="">Once you choose a word, a random gif for that word will appear here</p>
-                </div>
-                <!-- You can insert an actual GIF or image here -->
+          <div class="card-content">
+            <p class="title is-5">Gif It!</p>
+            <div>
+              <p id="gif-embed-slot" class="">
+                Once you choose a word, a random gif for that word will appear
+                here
+              </p>
             </div>
+          </div>
         </div>
+      </div>
+      <div class="main-content card ml-4">
+        <div class="card-content">
+          <p class="title is-5">Definitions list</p>
+          <p id="results">(definitions, example sentences, etc.)</p>
         </div>
-        <div class="main-content card ml-4">
-            <div class="card-content">
-                <p class="title is-5">Definitions list</p>
-                <p id="results">(definitions, example sentences, etc.)</p>
-            </div>
-        </div>
+      </div>
+    </div>
+    <div class="modal display-front" id="relatedWordsModal">
+      <div class="modal-background"></div>
+      <div class="modal-card">
+        <header class="modal-card-head">
+          <p class="modal-card-title">Related Words</p>
+          <button class="delete" aria-label="close"></button>
+        </header>
+        <section class="modal-card-body modal-body scroll-overflow">
+          <div id="related-words-display"></div>
+        </section>
+        <footer class="modal-card-foot">
+          <div class="buttons is-right">
+            <a class="button">Back</a>
+          </div>
+        </footer>
+      </div>
     </div>
     <script src="assets/scripts/wordInfoHandler.js"></script>
     <script src="assets/scripts/wordGifHandler.js"></script>
     <script src="assets/scripts/relatedWordsHandler.js"></script>
+    <script src="assets/scripts/modalHandler.js"></script>
     <script src="assets/scripts/index.js"></script>
-</body>
+  </body>
 </html>
