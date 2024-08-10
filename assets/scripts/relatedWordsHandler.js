@@ -22,7 +22,7 @@ function fetchRelatedWords(searchedWord) {
 }
 
 function populateModalContent(data) {
-  modalDisplayElement.setAttribute("class", "columns content");
+  modalDisplayElement.setAttribute("class", "columns card-content");
   modalDisplayElement.innerText = null;
 
   const synonyms = data.synonyms;
