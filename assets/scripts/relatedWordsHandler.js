@@ -47,6 +47,9 @@ function populateModalContent(data){
     const antonymsColumn = createUnorderedList(antonyms, 'Antonyms');
     modalDisplayElement.appendChild(antonymsColumn);
   }
+
+  const modalButtonWrapper = document.getElementById('modal-button-wrapper');
+  modalButtonWrapper.removeAttribute('hidden');
 }
 
 function isValidList(list){
