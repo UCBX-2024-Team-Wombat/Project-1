@@ -11,10 +11,3 @@ function handleSearch(event){
   fetchRelatedWords(searchedWord);
   fetchWordGif(searchedWord);
 }
-
-/* 
-File Explaination (To Delete):
-
-This file will serve as a sort of traffic-light/director for the other javascript files, as well as 
-handling responsibilities not covered by other files (adding event listeners, opening/closing modals)
-*/
