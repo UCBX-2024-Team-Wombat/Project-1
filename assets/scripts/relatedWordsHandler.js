@@ -24,7 +24,6 @@ function fetchRelatedWords(searchedWord){
 
 function populateModalContent(data){
 
-  const modalDisplayElement = document.getElementById('related-words-display');
   modalDisplayElement.setAttribute('class', 'columns content');
   modalDisplayElement.innerText = null;
 
@@ -48,7 +47,6 @@ function populateModalContent(data){
     modalDisplayElement.appendChild(antonymsColumn);
   }
 
-  const modalButtonWrapper = document.getElementById('modal-button-wrapper');
   modalButtonWrapper.removeAttribute('hidden');
 }
 
@@ -59,29 +57,42 @@ function isValidList(list){
 
 function createUnorderedList(list, listTitle){
 
+  // Create wrapper div for list title and list
   const listWrapper = document.createElement('div');
   listWrapper.setAttribute('class','column');
 
+  // Create list title and append
   const listTitleDisplay = document.createElement('p');
   listTitleDisplay.innerText = listTitle;
   listWrapper.appendChild(listTitleDisplay);
 
+  // Create unordered list
   const unorderedList = document.createElement('ul');
+  // Create list to collect already selected words
+  const alreadySelectedWords = [];
 
+  // Loop through list of words
   for(const stringValue of list){
-    // Create parent list element
-    const listItem = document.createElement('li');
-    // Create anchor tag to indicate click-ability
-    const anchor = document.createElement('a');
-    // Set text as anchor's inner text and custom data-word attribute to word 
-    anchor.innerText = stringValue;
-    anchor.setAttribute('data-word', stringValue);
+    // Check for repeat synonyms (can occur as quirk of api)
+    if(alreadySelectedWords.includes(stringValue) == false){
+      // Create parent list element
+      const listItem = document.createElement('li');
+      // Create anchor tag to indicate click-ability
+      const anchor = document.createElement('a');
+      // Set text as anchor's inner text and custom data-word attribute to word 
+      anchor.innerText = stringValue;
+      anchor.setAttribute('data-word', stringValue);
+  
+      // append new elements to list
+      listItem.appendChild(anchor);
+      unorderedList.appendChild(listItem);
 
-    //
-    listItem.appendChild(anchor);
-    unorderedList.appendChild(listItem);
+      // Add selected word to check list
+      alreadySelectedWords.push(stringValue);
+    }
   }
 
+  // Add list o wrapper and return wrapper
   listWrapper.appendChild(unorderedList);
 
   return listWrapper;

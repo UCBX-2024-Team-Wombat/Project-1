@@ -37,9 +37,7 @@ function fetchWordGif(word){
 }
 
 function renderGif(gifEmbedLink){
-  // Query element for population
-  const embedSlot = document.getElementById('gif-embed-slot');
-  // Clear default text
+  // Clear default text of embedSlot (provided by index.js)
   embedSlot.innerText = '';
 
   // Create new embed element and populate with link
