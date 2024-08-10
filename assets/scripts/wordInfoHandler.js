@@ -83,16 +83,15 @@ function getDefinitions(wordInfo, wordObj){
           console.log('mixedValueArray');
           console.log(mixedValueArray);
           
-          for (const stringOrObject of mixedValueArray) {
-            console.log('stringOrObject');
-            console.log(stringOrObject);
-            
-            // If value is object, then loop through values
-            if (typeof stringOrObject === "object") {
+          if(mixedValueArray[0] == 'sense'){
               // dt returns an array of strings.
               // The first string is a signifier, the second
               // is the actual definition.
-              for(const dtArrayValue of stringOrObject['dt']){
+              const dt = mixedValueArray[1]['dt'];
+              console.log('dt');
+              console.log(dt);
+
+              for(const dtArrayValue of dt){
                 // If first value in dtArray is string "text",
                 // get value in second index
                 if(dtArrayValue[0] == 'text'){
@@ -101,6 +100,15 @@ function getDefinitions(wordInfo, wordObj){
               }
             }
           }
+
+          // for (const stringOrObject of mixedValueArray) {
+          //   console.log('stringOrObject');
+          //   console.log(stringOrObject);
+            
+          //   // If value is object, then loop through values
+          //   if (typeof stringOrObject === "object") {
+
+          // }
         }
       }
     }
