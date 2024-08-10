@@ -59,21 +59,7 @@
     <script src="assets/scripts/wordInfoHandler.js"></script>
     <script src="assets/scripts/wordGifHandler.js"></script>
     <script src="assets/scripts/wordFrequencyHandler.js"></script>
-    <script src="assets/scripts/relatedWordsHandler.js" type="module"></script> <!-- Import the related words handler -->
-    <script src="assets/scripts/index.js"></script>
-    <script type="module">
-        import { showRelatedWords } from './assets/scripts/relatedWordsHandler.js';
-        document.getElementById('relatedWordsBtn').addEventListener('click', function() {
-            const word = document.querySelector('input[type="text"]').value;
-            showRelatedWords(word);
-            document.getElementById('relatedWordsModal').classList.add('is-active');
-        });
-
-        document.querySelectorAll('.modal .delete, .modal .button').forEach(function(closeButton) {
-            closeButton.addEventListener('click', function() {
-                document.getElementById('relatedWordsModal').classList.remove('is-active');
-            });
-        });
-    </script>
+    <script src="assets/scripts/relatedWordsHandler.js" type="module"></script>
+    <script src="assets/scripts/modalHandler.js" type="module"></script>
 </body>
 </html>
