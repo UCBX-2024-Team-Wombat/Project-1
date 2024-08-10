@@ -75,10 +75,18 @@ function getDefinitions(wordInfo, wordObj){
         // for each array value, check if that value has an array
         // of its own. Then loop through that array 
         // (which has a mixed array value)
+        console.log('sseqArrayValue');
+        console.log(sseqArrayValue);
         for (const mixedValueArray of sseqArrayValue) {
           // mixedValueArray has both strings and objects.
           // We want the objects only
+          console.log('mixedValueArray');
+          console.log(mixedValueArray);
+          
           for (const stringOrObject of mixedValueArray) {
+            console.log('stringOrObject');
+            console.log(stringOrObject);
+            
             // If value is object, then loop through values
             if (typeof stringOrObject === "object") {
               // dt returns an array of strings.
