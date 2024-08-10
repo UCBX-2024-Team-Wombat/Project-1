@@ -12,6 +12,7 @@ function handleSearch(event) {
   if(isValidWord(searchedWord)){
     hideInvalidWordNotice();
     resetPage();
+    fetchWordInfo(searchedWord);
     fetchRelatedWords(searchedWord);
     fetchWordGif(searchedWord);
   }
