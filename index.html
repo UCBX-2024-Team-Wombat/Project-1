@@ -22,44 +22,48 @@
             <div class="card">
                 <div class="card-content">
                     <p class="title is-5">Filler Text</p>
-                    <input class="input" type="text" placeholder="Word Input">
+                    <input class="input" id="searched-word" type="text" placeholder="Word Input">
                     <button id="search" class="button is-primary mt-3">Search</button>
                 </div>
             </div>
         <button id="relatedWordsBtn" class="button is-primary mt-3">Show Related Words</button>
         <div class="card mt-3">
             <div class="card-content">
-                <p class="title is-5">Gif</p>
-                <!-- You can insert an actual GIF or image here -->
+                <p class="title is-5">Gif It!</p>
+                <div class="columns is-centered">
+                    <p id="gif-embed-slot" class="">Once you choose a word, a random gif for that word will appear here</p>
+                </div>
             </div>
         </div>
         </div>
         <div class="main-content card ml-4">
             <div class="card-content">
-                <p class="title is-5">Definitions list</p>
-                <p>(definitions, example sentences, etc.)</p>
+                <div class="title is-5">Definitions list</div>
+                <div>(definitions, example sentences, etc.)</div>
             </div>
         </div>
     </div>
-    <div class="modal" id="relatedWordsModal">
+    <div class="modal display-front" id="relatedWordsModal">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title">Related Words</p>
                 <button class="delete" aria-label="close"></button>
             </header>
-            <section class="modal-card-body">
+            <section class="modal-card-body modal-body scroll-overflow">
+                <div id="related-words-display"></div>
             </section>
             <footer class="modal-card-foot">
-                <button class="button is-success">Save changes</button>
-                <button class="button">Cancel</button>
+                <div class="buttons is-right">
+                    <a class="button">Back</a>
+                </div>
             </footer>
         </div>
     </div>
     <script src="assets/scripts/wordInfoHandler.js"></script>
     <script src="assets/scripts/wordGifHandler.js"></script>
-    <script src="assets/scripts/wordFrequencyHandler.js"></script>
-    <script src="assets/scripts/relatedWordsHandler.js" type="module"></script>
-    <script src="assets/scripts/modalHandler.js" type="module"></script>
+    <script src="assets/scripts/relatedWordsHandler.js"></script>
+    <script src="assets/scripts/modalHandler.js"></script>
+    <script src="assets/scripts/index.js"></script>
 </body>
 </html>
