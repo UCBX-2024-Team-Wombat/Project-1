@@ -1,57 +1,42 @@
-import { showRelatedWords } from './relatedWordsHandler.js';
+// Variables //
+const modalButtonWrapper = document.getElementById('modal-button-wrapper');
+const modalDisplayElement = document.getElementById('related-words-display');
+const relatedWordsModalButton = document.getElementById(
+  "related-words-modal-button"
+);
+const modalElement = document.getElementById("relatedWordsModal");
+const modalBackground = document.querySelector(".modal-background");
+const modalDeleteButton = document.querySelector("button.delete");
+const modalBackButton = document.querySelector("a.button");
 
-document.addEventListener('DOMContentLoaded', () => {
-    function openModal($el) {
-        $el.classList.add('is-active');
-    }
+// Execution //
 
-    function closeModal($el) {
-        $el.classList.remove('is-active');
-    }
+// Create listeners for modal opening and closing
+relatedWordsModalButton.addEventListener("click", openModal);
+modalBackground.addEventListener("click", closeModal);
+modalDeleteButton.addEventListener("click", closeModal);
+modalBackButton.addEventListener("click", closeModal);
 
-    function closeAllModals() {
-        (document.querySelectorAll('.modal') || []).forEach(($modal) => {
-            closeModal($modal);
-        });
-    }
-
-    (document.querySelectorAll('.js-modal-trigger') || []).forEach(($trigger) => {
-        const modal = $trigger.dataset.target;
-        const $target = document.getElementById(modal);
-
-        $trigger.addEventListener('click', () => {
-            const word = document.querySelector('input[type="text"]').value;
-            showRelatedWords(word); 
-            openModal($target);
-        });
-    });
-
-    // click event added to child elements. it will close the modal
-    (document.querySelectorAll('.modal-background, .modal-close, .modal-card-head .delete, .modal-card-foot .button') || []).forEach(($close) => {
-        const $target = $close.closest('.modal');
-
-        $close.addEventListener('click', () => {
-            closeModal($target);
-        });
-    });
-
-    // using keyboard to close all modals
-    document.addEventListener('keydown', (event) => {
-        if (event.key === "Escape") {
-            closeAllModals();
-        }
-    });
-
-    document.getElementById('relatedWordsBtn').addEventListener('click', function() {
-        const word = document.querySelector('input[type="text"]').value;
-        showRelatedWords(word);
-        document.getElementById('relatedWordsModal').classList.add('is-active');
-    });
-
-    // Handle closing the modal
-    document.querySelectorAll('.modal .delete, .modal .button').forEach(function(closeButton) {
-        closeButton.addEventListener('click', function() {
-            document.getElementById('relatedWordsModal').classList.remove('is-active');
-        });
-    });
+// Source: https://bulma.io/documentation/components/modal/#javascript-implementation-example
+document.addEventListener("keydown", (event) => { // Add a keydown event listener for the entire document
+  if (event.key === "Escape") { // check if the pressed key is the escape key
+    closeModal(); // if so, run the closeModal() function
+  }
 });
+
+// Functions //
+function openModal() {
+  // Add the bulma 'is-active' class to the passed element
+  modalElement.classList.add("is-active");
+}
+
+function closeModal() {
+  // Remove the bulma 'is-active' class to the passed element
+  modalElement.classList.remove("is-active");
+}
+
+function resetModal() {
+  // Hide modal button and reset content
+  modalButtonWrapper.setAttribute('hidden', 'true');
+  modalDisplayElement.innerText = null;
+}
