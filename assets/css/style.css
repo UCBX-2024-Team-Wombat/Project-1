@@ -1,0 +1,48 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+}
+
+.site-header {
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
+.container {
+    display: flex;
+    padding: 20px;
+}
+
+
+.sidebar {
+    width: 30%;
+    padding-right: 20px;
+}
+
+.sidebar .card {
+    margin-bottom: 20px;
+}
+
+.main-content {
+    width: 70%;
+    background-color: #f9f9f9;
+}
+
+.main-content .card-content {
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+
+.header-buttons .button {
+    margin-left: 10px;
+}
