@@ -31,6 +31,9 @@ function populateModalContent(data){
   const synonyms = data.synonyms;
   const antonyms = data.antonyms;
 
+  synonyms.sort();
+  antonyms.sort();
+
   if(isValidList(synonyms) == false && isValidList(antonyms) === false){
     modalDisplayElement.innerText = `Sorry, we couldn't find any synonyms or antonyms for ${data.word}`;
   }
