@@ -60,6 +60,8 @@ function fetchWordInfo(word) {
       }
       console.log('wordArray');
       console.log(wordArray);
+      console.log('wordArray.length');
+      console.log(wordArray.length);
       if (wordArray.length == 0) {
         const errorNotice = document.createElement('div');
         errorNotice.setAttribute('class', 'word-info-error');
