@@ -28,11 +28,9 @@ function fetchWordInfo(word) {
       const wordArray = [];
 
       for (const wordInfo of wordData) {
-        console.log("wordInfo");
-        console.log(wordInfo);
+
         if (typeof wordInfo === "object") {
           if (Object.keys(wordInfo).includes("hom")) {
-            console.log("in loop");
             const wordObj = {};
             //hw is the API identifier for the searched word
             wordObj["headword"] = wordInfo.hwi.hw.replace(/\*/gi, "");
@@ -58,10 +56,7 @@ function fetchWordInfo(word) {
           }
         }
       }
-      console.log("wordArray");
-      console.log(wordArray);
-      console.log("wordArray.length");
-      console.log(wordArray.length);
+
       if (wordArray.length == 0) {
         const errorNotice = document.createElement("h3");
         errorNotice.innerText =
