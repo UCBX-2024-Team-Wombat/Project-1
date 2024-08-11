@@ -72,9 +72,3 @@ ul {
 .boldify {
     font-weight: bold;
 }
-
-.word-info-error {
-    font-style: "bold";
-    font-size: "24px";
-    color: "red";
-}

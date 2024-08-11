@@ -64,7 +64,6 @@ function fetchWordInfo(word) {
       console.log(wordArray.length);
       if (wordArray.length == 0) {
         const errorNotice = document.createElement("h3");
-        errorNotice.setAttribute("class", "word-info-error");
         errorNotice.innerText =
           "No results found. Please check spelling and try again.";
         wordInfoElement.appendChild(errorNotice);
