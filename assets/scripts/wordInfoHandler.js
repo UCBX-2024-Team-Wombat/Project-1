@@ -67,11 +67,10 @@ function fetchWordInfo(word) {
       console.log(wordArray);
 
       if (wordArray.length == 0) {
-        const wordNotFound = document.getElementById("results");
-        wordNotFound.style.fontStyle = "bold";
-        wordNotFound.style.fontSize = "24px";
-        wordNotFound.style.color = "red";
-        wordNotFound.innerHTML =
+        wordInfoElement.style.fontStyle = "bold";
+        wordInfoElement.style.fontSize = "24px";
+        wordInfoElement.style.color = "red";
+        wordInfoElement.innerHTML =
           "<h3>No results found! Please check spelling and try again.</h3>";
       }
       else {
@@ -81,11 +80,10 @@ function fetchWordInfo(word) {
     .catch(function (error) {
       console.log('error');
       console.log(error);
-      const somethingWentWrong = document.getElementById("results");
-      somethingWentWrong.style.fontStyle = "bold";
-      somethingWentWrong.style.fontSize = "24px";
-      somethingWentWrong.style.color = "red";
-      somethingWentWrong.innerHTML =
+      wordInfoElement.style.fontStyle = "bold";
+      wordInfoElement.style.fontSize = "24px";
+      wordInfoElement.style.color = "red";
+      wordInfoElement.innerHTML =
         "<h3>Sorry, something went wrong.</h3>";
     });
 }
