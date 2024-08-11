@@ -1,7 +1,7 @@
 // Variables
 
-const searchInputEl = document.getElementById('searched-word');
-const searchBtn = document.getElementById('search');
+const searchInputEl = document.getElementById("searched-word");
+const searchBtn = document.getElementById("search");
 const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
 
 // Functions
@@ -9,78 +9,72 @@ const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
 function fetchWordInfo(word) {
   //set the URL for the fetch function
   const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`;
-  console.log('url');
+  console.log("url");
   console.log(url);
 
   fetch(url)
     .then(function (response) {
-      console.log('response');
+      console.log("response");
       console.log(response);
       if (!response.ok) {
-        throw response.json();             
+        throw response.json();
       }
 
       return response.json();
     })
     .then(function (wordData) {
-      console.log('wordData');
+      console.log("wordData");
       console.log(wordData);
-      
-      // const wordWithoutAsterisks = wordData.hwi.hw.replace(/\*/gi, "");
-    //  in this section, we need to remove asterisks from the hw data
-      // if (!(word in wordData)) {
-      //   // this message does not print to the console. The array does.
-      //   console.log("ERROR"); 
 
-      //   const wordNotFound = document.getElementById("results");
-      //   wordNotFound.style.fontStyle = "bold";
-      //   wordNotFound.style.fontSize = "24px";
-      //   wordNotFound.style.color = "red";
-      //   wordNotFound.innerHTML =
-      //     "<h3>No results found! Please check spelling and try again.</h3>";
+      const wordArray = [];
 
+      for (const wordInfo of wordData) {
+        if ("hom" in wordInfo) {
+          const wordObj = {};
+          //hw is the API identifier for the searched word
+          wordObj["headword"] = wordInfo.hwi.hw.replace(/\*/gi, "");
+          // retrieve word type, not within hwi object
+          wordObj["wordType"] = wordInfo.fl[0];
+          // in the case of homographs, wordInfo should be the first word (most relevant)
 
-      // } else {
-        const wordArray = [];
-
-        for (const wordInfo of wordData) {
-          // if ("hom" in wordInfo) {
-            const wordObj = {};
-            //hw is the API identifier for the searched word
-            wordObj["headword"] = wordInfo.hwi.hw.replace(/\*/gi, "");
-            // retrieve word type, not within hwi object
-            wordObj["wordType"] = wordInfo.fl[0];
-            // in the case of homographs, wordInfo should be the first word (most relevant)
-
-            if ("prs" in wordInfo.hwi) {
-              if ("mw" in wordInfo.hwi.prs) {
-                wordObj["pronunciation"] = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
-              }
-              if ("sound" in wordInfo.hwi.prs) {
-                wordObj["wordAudio"] = wordInfo.hwi.prs[0].sound.audio;
-              }
+          if ("prs" in wordInfo.hwi) {
+            if ("mw" in wordInfo.hwi.prs) {
+              wordObj["pronunciation"] = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
             }
-
-            if ("et" in wordInfo) {
-              wordObj["etymology"] = wordInfo.et[0];
+            if ("sound" in wordInfo.hwi.prs) {
+              wordObj["wordAudio"] = wordInfo.hwi.prs[0].sound.audio;
             }
+          }
 
-            getDefinitions(wordInfo, wordObj);
+          if ("et" in wordInfo) {
+            wordObj["etymology"] = wordInfo.et[0];
+          }
 
-            // const wordSentence = wordInfo.def.sseq[0].vis[0];
+          getDefinitions(wordInfo, wordObj);
 
-            wordArray.push(wordObj);
-          // }
+          wordArray.push(wordObj);
         }
+      }
 
-        console.log(wordArray);
-        saveWordToStorage(wordArray);
-
-        return wordArray;
-      // }
+      if (wordArray.length == 0) {
+        const wordNotFound = document.getElementById("results");
+        wordNotFound.style.fontStyle = "bold";
+        wordNotFound.style.fontSize = "24px";
+        wordNotFound.style.color = "red";
+        wordNotFound.innerHTML =
+          "<h3>No results found! Please check spelling and try again.</h3>";
+      }
+      else {
+        writeWordInfo(wordArray);
+      }
     })
     .catch(function (error) {
-      console.error(error);
+      const somethingWentWrong = document.getElementById("results");
+      somethingWentWrong.style.fontStyle = "bold";
+      somethingWentWrong.style.fontSize = "24px";
+      somethingWentWrong.style.color = "red";
+      somethingWentWrong.innerHTML =
+        "<h3>Sorry, something went wrong.</h3>";
     });
 }
 
@@ -123,6 +117,15 @@ function getDefinitions(wordInfo, wordObj) {
         }
       }
     }
+  }
+}
+
+function writeWordInfo(wordArray){
+
+  const wordInfoDisplay = document.getElementById('results');
+
+  for(const wordInfo of wordArray){
+    wordInfoDisplay.appendChild(createWordCard(wordInfo));
   }
 }
 
@@ -174,9 +177,9 @@ function createWordCard(word) {
 //   createWordCard();
 // }
 
-function saveWordToStorage(wordInfo) {
-  localStorage.setItem("wordInfo", JSON.stringify(wordInfo));
-}
+// function saveWordToStorage(wordInfo) {
+//   localStorage.setItem("wordInfo", JSON.stringify(wordInfo));
+// }
 
 // request URL: https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=948a3ec4-0862-47ce-bf63-b217e7cbcc75
 
