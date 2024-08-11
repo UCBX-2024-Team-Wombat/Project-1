@@ -55,6 +55,9 @@ function fetchWordInfo(word) {
           wordArray.push(wordObj);
         }
       }
+      
+      console.log('wordArray');
+      console.log(wordArray);
 
       if (wordArray.length == 0) {
         const wordNotFound = document.getElementById("results");
