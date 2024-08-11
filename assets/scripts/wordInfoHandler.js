@@ -55,7 +55,8 @@ function fetchWordInfo(word) {
           wordArray.push(wordObj);
         }
       }
-
+      console.log('wordArray');
+      console.log(wordArray);
       if (wordArray.length == 0) {
         const errorNotice = document.createElement('div');
         errorNotice.setAttribute('class', 'word-info-error');
