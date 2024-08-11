@@ -7,7 +7,6 @@ const invalidWordNotice = document.getElementById('invalid-word-notice');
 searchButton.addEventListener("click", handleSearch);
 
 // Functions
-<<<<<<<<< Temporary merge branch 1
 function handleSearch(event) {
   const searchedWord = searchInput.value.trim();
   if(isValidWord(searchedWord)){
@@ -20,13 +19,6 @@ function handleSearch(event) {
   else {
     displayInvalidWordNotice();
   }
-=========
-function handleSearch(event){
-  const searchedWord = document.getElementById('searched-word').value;
-  fetchWordInfo(searchedWord);
-  fetchRelatedWords(searchedWord);
-  fetchWordGif(searchedWord);
->>>>>>>>> Temporary merge branch 2
 }
 
 // Reset page elements between new word searches
