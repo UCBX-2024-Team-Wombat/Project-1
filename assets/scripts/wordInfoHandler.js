@@ -113,7 +113,7 @@ function getDefinitions(wordInfo, wordObj) {
               if (dtArrayValue[0] == "text") {
                 wordObj.definition.push(
                   dtArrayValue[1].replace(
-                    /\{bc\}|\{dx_ety\}.*?\{\/dx_ety\}|\{dx_def\}.*?\{\/dx_def\}|\{.*?\||\|\|\}|\|.*?\}|\|\|.*?\}/g, "")
+                    /\{bc\}|\{dx_ety\}.*?\{\/dx_ety\}|\{dx_def\}.*?\{\/dx_def\}|\{.*?\||\|\|\}|\|.*?\}|\|\|.*?\}|\}/g, "")
                 );
               }
             }
