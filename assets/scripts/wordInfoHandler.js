@@ -30,7 +30,8 @@ function fetchWordInfo(word) {
       for (const wordInfo of wordData) {
 
         if (typeof wordInfo === "object") {
-          if (Object.keys(wordInfo).includes("hom")) {
+          if (Object.keys(wordInfo).includes("hom") ||
+              wordInfo['meta']['id'] == word ) {
             const wordObj = {};
             //hw is the API identifier for the searched word
             wordObj["headword"] = wordInfo.hwi.hw.replace(/\*/gi, "");
