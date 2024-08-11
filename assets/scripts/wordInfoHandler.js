@@ -65,6 +65,7 @@ function fetchWordInfo(word) {
         errorNotice.setAttribute('class', 'word-info-error');
         errorNotice.innerHTML =
           "<h3>No results found! Please check spelling and try again.</h3>";
+        wordInfoElement.appendChild(errorNotice);
       } else {
         writeWordInfo(wordArray);
       }
