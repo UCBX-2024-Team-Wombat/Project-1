@@ -161,7 +161,7 @@ function createWordCard(word) {
   // Construct etymology
   const wordEtymology = document.createElement("div");
   wordEtymology.classList.add("word-etymology");
-  wordEtymology.textContent = `<span class='boldify'>Etymology</span>: ${word.etymology}`;
+  wordEtymology.innerHTML = `<span class='boldify'>Etymology</span>: ${word.etymology}`;
   wordCard.appendChild(wordEtymology);
 
   // Construct definitions
