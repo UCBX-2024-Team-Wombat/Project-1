@@ -76,14 +76,14 @@ function fetchWordInfo(word) {
         writeWordInfo(wordArray);
       }
     })
-    .catch(function (error) {
-      console.log("error");
-      console.log(error);
-      wordInfoElement.style.fontStyle = "bold";
-      wordInfoElement.style.fontSize = "24px";
-      wordInfoElement.style.color = "red";
-      wordInfoElement.innerHTML = "<h3>Sorry, something went wrong.</h3>";
-    });
+    // .catch(function (error) {
+    //   console.log("error");
+    //   console.log(error);
+    //   wordInfoElement.style.fontStyle = "bold";
+    //   wordInfoElement.style.fontSize = "24px";
+    //   wordInfoElement.style.color = "red";
+    //   wordInfoElement.innerHTML = "<h3>Sorry, something went wrong.</h3>";
+    // });
 }
 
 function resetWordInfo() {
