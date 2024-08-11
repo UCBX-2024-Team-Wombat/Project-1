@@ -73,6 +73,8 @@ function fetchWordInfo(word) {
       }
     })
     .catch(function (error) {
+      console.log('error');
+      console.log(error);
       const somethingWentWrong = document.getElementById("results");
       somethingWentWrong.style.fontStyle = "bold";
       somethingWentWrong.style.fontSize = "24px";
