@@ -28,6 +28,8 @@ function fetchWordInfo(word) {
       const wordArray = [];
 
       for (const wordInfo of wordData) {
+        console.log('wordInfo');
+        console.log(wordInfo);
         if ("hom" in wordInfo) {
           const wordObj = {};
           //hw is the API identifier for the searched word
