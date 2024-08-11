@@ -12,6 +12,8 @@ function fetchWordInfo(word) {
 
   fetch(url)
     .then(function (response) {
+      console.log('response');
+      console.log(response);
       if (!response.ok) {
         throw response.json();             
       }
@@ -19,6 +21,9 @@ function fetchWordInfo(word) {
       return response.json();
     })
     .then(function (wordData) {
+      console.log('wordData');
+      console.log(wordData);
+      
       // const wordWithoutAsterisks = wordData.hwi.hw.replace(/\*/gi, "");
     //  in this section, we need to remove asterisks from the hw data
       if (!(word in wordData)) {
