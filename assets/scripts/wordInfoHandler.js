@@ -15,13 +15,9 @@ const wordTypeMap = {
 function fetchWordInfo(word) {
   //set the URL for the fetch function
   const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`;
-  console.log("url");
-  console.log(url);
 
   fetch(url)
     .then(function (response) {
-      console.log("response");
-      console.log(response);
       if (!response.ok) {
         throw response.json();
       }
@@ -29,9 +25,6 @@ function fetchWordInfo(word) {
       return response.json();
     })
     .then(function (wordData) {
-      console.log("wordData");
-      console.log(wordData);
-
       const wordArray = [];
 
       for (const wordInfo of wordData) {
@@ -57,15 +50,11 @@ function fetchWordInfo(word) {
           }
 
           getDefinitions(wordInfo, wordObj);
-          console.log("wordObj.definition");
-          console.log(wordObj.definition);
           wordArray.push(wordObj);
         }
       }
-
-      console.log("wordArray");
+      console.log('wordArray');
       console.log(wordArray);
-
       if (wordArray.length == 0) {
         wordInfoElement.style.fontStyle = "bold";
         wordInfoElement.style.fontSize = "24px";
@@ -76,14 +65,6 @@ function fetchWordInfo(word) {
         writeWordInfo(wordArray);
       }
     })
-    // .catch(function (error) {
-    //   console.log("error");
-    //   console.log(error);
-    //   wordInfoElement.style.fontStyle = "bold";
-    //   wordInfoElement.style.fontSize = "24px";
-    //   wordInfoElement.style.color = "red";
-    //   wordInfoElement.innerHTML = "<h3>Sorry, something went wrong.</h3>";
-    // });
 }
 
 function resetWordInfo() {
