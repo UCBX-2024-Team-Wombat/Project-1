@@ -28,19 +28,19 @@ function fetchWordInfo(word) {
       
       // const wordWithoutAsterisks = wordData.hwi.hw.replace(/\*/gi, "");
     //  in this section, we need to remove asterisks from the hw data
-      if (!(word in wordData)) {
-        // this message does not print to the console. The array does.
-        console.log("ERROR"); 
+      // if (!(word in wordData)) {
+      //   // this message does not print to the console. The array does.
+      //   console.log("ERROR"); 
 
-        const wordNotFound = document.getElementById("results");
-        wordNotFound.style.fontStyle = "bold";
-        wordNotFound.style.fontSize = "24px";
-        wordNotFound.style.color = "red";
-        wordNotFound.innerHTML =
-          "<h3>No results found! Please check spelling and try again.</h3>";
+      //   const wordNotFound = document.getElementById("results");
+      //   wordNotFound.style.fontStyle = "bold";
+      //   wordNotFound.style.fontSize = "24px";
+      //   wordNotFound.style.color = "red";
+      //   wordNotFound.innerHTML =
+      //     "<h3>No results found! Please check spelling and try again.</h3>";
 
 
-      } else {
+      // } else {
         const wordArray = [];
 
         for (const wordInfo of wordData) {
