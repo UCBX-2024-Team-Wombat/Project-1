@@ -151,7 +151,7 @@ function createWordCard(word) {
   const wordType = document.createElement("div");
   wordType.classList.add("word-type");
   const wordTypeText =
-    word.wordType in Object.keys(wordTypeMap)
+    Object.keys(wordTypeMap).includes(word.wordType)
       ? wordTypeMap[word.wordType]
       : word.wordType;
   
