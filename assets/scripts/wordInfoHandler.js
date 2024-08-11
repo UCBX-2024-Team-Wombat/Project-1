@@ -113,6 +113,8 @@ function getDefinitions(wordInfo, wordObj) {
             for (const dtArrayValue of dt) {
               // If first value in dtArray is string "text",
               // get value in second index
+              console.log('dtArrayValue');
+              console.log(dtArrayValue);
               if (dtArrayValue[0] == "text") {
                 wordObj.definition.push(dtArrayValue[1]);
               }
