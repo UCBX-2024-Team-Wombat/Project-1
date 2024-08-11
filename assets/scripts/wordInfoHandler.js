@@ -166,12 +166,12 @@ function createWordCard(word) {
 
   // Construct definitions
   const definitionsWrapper = document.createElement("div");
-  definitionsWrapper.innerText = "<span class='boldify'>Definition(s)</span>";
+  definitionsWrapper.innerHTML = "<span class='boldify'>Definition(s)</span>";
   const definitionUnorderedList = document.createElement("ul");
 
   for (const definition of word.definition) {
     const definitionListItem = document.createElement("li");
-    definitionListItem.innerText = definition;
+    definitionListItem.innerHTML = definition;
     definitionUnorderedList.appendChild(definitionListItem);
   }
 
