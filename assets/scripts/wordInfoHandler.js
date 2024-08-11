@@ -135,7 +135,7 @@ function getDefinitions(wordInfo, wordObj) {
 }
 
 function writeWordInfo(wordArray) {
-  const wordInfoDisplay = document.getElementById("results");
+  const wordInfoDisplay = document.getElementById("word-info");
 
   for (const wordInfo of wordArray) {
     const wordCard = createWordCard(wordInfo);
