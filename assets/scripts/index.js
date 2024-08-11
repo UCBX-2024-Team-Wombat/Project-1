@@ -7,25 +7,26 @@ const invalidWordNotice = document.getElementById('invalid-word-notice');
 searchButton.addEventListener("click", handleSearch);
 
 // Functions
-<<<<<<< HEAD
-function handleSearch(event){
-  const searchedWord = document.getElementById('searched-word').value;
-  fetchWordInfo(searchedWord);
-  fetchRelatedWords(searchedWord);
-  fetchWordGif(searchedWord);
-=======
+<<<<<<<<< Temporary merge branch 1
 function handleSearch(event) {
   const searchedWord = searchInput.value.trim();
   if(isValidWord(searchedWord)){
     hideInvalidWordNotice();
     resetPage();
+    fetchWordInfo(searchedWord);
     fetchRelatedWords(searchedWord);
     fetchWordGif(searchedWord);
   }
   else {
     displayInvalidWordNotice();
   }
->>>>>>> ca72d568040204749fe3b6d6e9a50bca0053bfc6
+=========
+function handleSearch(event){
+  const searchedWord = document.getElementById('searched-word').value;
+  fetchWordInfo(searchedWord);
+  fetchRelatedWords(searchedWord);
+  fetchWordGif(searchedWord);
+>>>>>>>>> Temporary merge branch 2
 }
 
 // Reset page elements between new word searches
