@@ -13,7 +13,7 @@ body {
     padding: 10px 20px;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 5;
 }
 
 
@@ -45,4 +45,16 @@ body {
 
 .header-buttons .button {
     margin-left: 10px;
+}
+
+.scroll-overflow {
+    overflow-y: scroll;
+}
+
+.modal-body {
+    max-height: 60vh;
+}
+
+.display-front {
+    z-index: 100;
 }
