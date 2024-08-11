@@ -77,7 +77,7 @@ function fetchWordInfo(word) {
         saveWordToStorage(wordArray);
 
         return wordArray;
-      }
+      // }
     })
     .catch(function (error) {
       console.error(error);
