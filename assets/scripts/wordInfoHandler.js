@@ -1,8 +1,14 @@
 // Variables
 
-const searchInputEl = document.getElementById('searched-word');
-const searchBtn = document.getElementById('search');
+const searchInputEl = document.getElementById("searched-word");
+const searchBtn = document.getElementById("search");
+const wordInfoElement = document.getElementById("word-info");
 const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
+const wordTypeMap = {
+  n: "Noun",
+  a: "Adjective",
+  v: "Verb",
+};
 
 // Functions
 
@@ -13,31 +19,18 @@ function fetchWordInfo(word) {
   fetch(url)
     .then(function (response) {
       if (!response.ok) {
-        throw response.json();             
+        throw response.json();
       }
 
       return response.json();
     })
     .then(function (wordData) {
-      // const wordWithoutAsterisks = wordData.hwi.hw.replace(/\*/gi, "");
-    //  in this section, we need to remove asterisks from the hw data
-      if (!(word in wordData)) {
-        // this message does not print to the console. The array does.
-        console.log("ERROR"); 
+      const wordArray = [];
 
-        const wordNotFound = document.getElementById("results");
-        wordNotFound.style.fontStyle = "bold";
-        wordNotFound.style.fontSize = "24px";
-        wordNotFound.style.color = "red";
-        wordNotFound.innerHTML =
-          "<h3>No results found! Please check spelling and try again.</h3>";
+      for (const wordInfo of wordData) {
 
-
-      } else {
-        const wordArray = [];
-
-        for (const wordInfo of wordData) {
-          if ("hom" in wordInfo) {
+        if (typeof wordInfo === "object") {
+          if (Object.keys(wordInfo).includes("hom")) {
             const wordObj = {};
             //hw is the API identifier for the searched word
             wordObj["headword"] = wordInfo.hwi.hw.replace(/\*/gi, "");
@@ -59,22 +52,24 @@ function fetchWordInfo(word) {
             }
 
             getDefinitions(wordInfo, wordObj);
-
-            // const wordSentence = wordInfo.def.sseq[0].vis[0];
-
             wordArray.push(wordObj);
           }
         }
-
-        console.log(wordArray);
-        saveWordToStorage(wordArray);
-
-        return wordArray;
       }
-    })
-    .catch(function (error) {
-      console.error(error);
+
+      if (wordArray.length == 0) {
+        const errorNotice = document.createElement("h3");
+        errorNotice.innerText =
+          "No results found. Please check spelling and try again.";
+        wordInfoElement.appendChild(errorNotice);
+      } else {
+        writeWordInfo(wordArray);
+      }
     });
+}
+
+function resetWordInfo() {
+  wordInfoElement.innerHTML = null;
 }
 
 function getDefinitions(wordInfo, wordObj) {
@@ -108,6 +103,8 @@ function getDefinitions(wordInfo, wordObj) {
             for (const dtArrayValue of dt) {
               // If first value in dtArray is string "text",
               // get value in second index
+              console.log("dtArrayValue");
+              console.log(dtArrayValue);
               if (dtArrayValue[0] == "text") {
                 wordObj.definition.push(dtArrayValue[1]);
               }
@@ -119,67 +116,48 @@ function getDefinitions(wordInfo, wordObj) {
   }
 }
 
+function writeWordInfo(wordArray) {
+  const wordInfoDisplay = document.getElementById("word-info");
+
+  for (const wordInfo of wordArray) {
+    const wordCard = createWordCard(wordInfo);
+    wordInfoDisplay.appendChild(wordCard);
+  }
+}
+
 function createWordCard(word) {
   const wordCard = document.createElement("div");
-  wordCard.classList.add("word-card");
+  wordCard.setAttribute("class", "card word-card");
 
-  const wordName = document.createElement("div");
-  wordName.classList.add("word-name");
-  wordName.textContent = word.word;
-
+  // Construct word type
   const wordType = document.createElement("div");
   wordType.classList.add("word-type");
-  wordType.textContent = word.type;
+  const wordTypeText = Object.keys(wordTypeMap).includes(word.wordType)
+    ? wordTypeMap[word.wordType]
+    : word.wordType;
 
-  const wordPronunciation = document.createElement("div");
-  wordPronunciation.classList.add("word-pronunciation");
-  wordPronunciation.textContent = word.pronunc;
+  wordType.innerHTML = `<span class='boldify'>Word Type</span>: ${wordTypeText}`;
+  wordCard.appendChild(wordType);
 
-  const wordAudioPronunciation = document.createElement("div");
-  wordAudioPronunciation.classList.add("word-audio-pronunciation");
-  wordAudioPronunciation.textContent = word.audio;
-
+  // Construct etymology
   const wordEtymology = document.createElement("div");
   wordEtymology.classList.add("word-etymology");
-  wordEtymology.textContent = word.etym;
-
-  const wordSentence = document.createElement("div");
-  wordSentence.classList.add("word-sentence");
-  // wordSentence.textContent = word.example;
-
-  // append each word element to the word card
-  wordCard.appendChild(wordName);
-  wordCard.appendChild(wordPronunciation);
-  wordCard.appendChild(wordAudioPronunciation);
-  wordCard.appendChild(wordType);
+  wordEtymology.innerHTML = `<span class='boldify'>Etymology</span>: ${word.etymology}`;
   wordCard.appendChild(wordEtymology);
-  wordCard.appendChild(wordSentence);
 
-  // append word card to the HTML box/element
-  const wordInfoDiv = document.getElementById("word-info");
-  wordInfoDiv.appendChild(wordCard);
+  // Construct definitions
+  const definitionsWrapper = document.createElement("div");
+  definitionsWrapper.innerHTML = "<span class='boldify'>Definition(s)</span>";
+  const definitionUnorderedList = document.createElement("ul");
+
+  for (const definition of word.definition) {
+    const definitionListItem = document.createElement("li");
+    definitionListItem.innerHTML = definition;
+    definitionUnorderedList.appendChild(definitionListItem);
+  }
+
+  definitionsWrapper.appendChild(definitionUnorderedList);
+  wordCard.appendChild(definitionsWrapper);
 
   return wordCard;
 }
-
-// not sure if this needs to be here
-// function renderWordInfo() {
-//   createWordCard();
-// }
-
-function saveWordToStorage(wordInfo) {
-  localStorage.setItem("wordInfo", JSON.stringify(wordInfo));
-}
-
-// request URL: https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=948a3ec4-0862-47ce-bf63-b217e7cbcc75
-
-/* 
-File Explaination (To Delete):
-
-This file is responsible for collecting core word data, including
-- List of definitions
-  - part of speech for each definition
-  - "type of" information
-  - Sentence examples
-- Syllable info
-*/
