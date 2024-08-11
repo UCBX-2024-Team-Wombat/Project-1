@@ -37,8 +37,7 @@ function fetchWordInfo(word) {
             wordObj["headword"] = wordInfo.hwi.hw.replace(/\*/gi, "");
             // retrieve word type, not within hwi object
             wordObj["wordType"] = wordInfo.fl[0];
-            // in the case of homographs, wordInfo should be the first word (most relevant)
-
+            // prs is the API keyword for pronunciation
             if ("prs" in wordInfo.hwi) {
               if ("mw" in wordInfo.hwi.prs) {
                 wordObj["pronunciation"] = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
@@ -65,8 +64,13 @@ function fetchWordInfo(word) {
         wordInfoElement.appendChild(errorNotice);
       } else {
         writeWordInfo(wordArray);
+        saveToLocalStorage(wordArray);
       }
     });
+}
+
+function saveToLocalStorage(wordInfo) {
+  localStorage.setItem("wordInfo", JSON.stringify(wordInfo));
 }
 
 function resetWordInfo() {
@@ -107,7 +111,7 @@ function getDefinitions(wordInfo, wordObj) {
               console.log("dtArrayValue");
               console.log(dtArrayValue);
               if (dtArrayValue[0] == "text") {
-                wordObj.definition.push(dtArrayValue[1]);
+                wordObj.definition.push(dtArrayValue[1].replace(/\{bc\}/g, ""));
               }
             }
           }
