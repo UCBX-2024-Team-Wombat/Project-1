@@ -127,11 +127,16 @@ function getDefinitions(wordInfo, wordObj) {
 }
 
 function writeWordInfo(wordArray){
-
+  console.log('in writeWordInfo');
   const wordInfoDisplay = document.getElementById('results');
-
+  console.log('wordInfoDisplay');
+  console.log(wordInfoDisplay);
+  
   for(const wordInfo of wordArray){
-    wordInfoDisplay.appendChild(createWordCard(wordInfo));
+    const wordCard = createWordCard(wordInfo);
+    console.log('wordCard');
+    console.log(wordCard);
+    wordInfoDisplay.appendChild(wordCard);
   }
 }
 
@@ -139,34 +144,34 @@ function createWordCard(word) {
   const wordCard = document.createElement("div");
   wordCard.classList.add("word-card");
 
-  const wordName = document.createElement("div");
-  wordName.classList.add("word-name");
-  wordName.textContent = word.word;
+  // const wordName = document.createElement("div");
+  // wordName.classList.add("word-name");
+  // wordName.textContent = word.word;
 
   const wordType = document.createElement("div");
   wordType.classList.add("word-type");
-  wordType.textContent = word.type;
+  wordType.textContent = word.wordType;
 
-  const wordPronunciation = document.createElement("div");
-  wordPronunciation.classList.add("word-pronunciation");
-  wordPronunciation.textContent = word.pronunc;
+  // const wordPronunciation = document.createElement("div");
+  // wordPronunciation.classList.add("word-pronunciation");
+  // wordPronunciation.textContent = word.pronunc;
 
-  const wordAudioPronunciation = document.createElement("div");
-  wordAudioPronunciation.classList.add("word-audio-pronunciation");
-  wordAudioPronunciation.textContent = word.audio;
+  // const wordAudioPronunciation = document.createElement("div");
+  // wordAudioPronunciation.classList.add("word-audio-pronunciation");
+  // wordAudioPronunciation.textContent = word.audio;
 
   const wordEtymology = document.createElement("div");
   wordEtymology.classList.add("word-etymology");
-  wordEtymology.textContent = word.etym;
+  wordEtymology.textContent = word.etymology;
 
   const wordSentence = document.createElement("div");
   wordSentence.classList.add("word-sentence");
   // wordSentence.textContent = word.example;
 
   // append each word element to the word card
-  wordCard.appendChild(wordName);
-  wordCard.appendChild(wordPronunciation);
-  wordCard.appendChild(wordAudioPronunciation);
+  // wordCard.appendChild(wordName);
+  // wordCard.appendChild(wordPronunciation);
+  // wordCard.appendChild(wordAudioPronunciation);
   wordCard.appendChild(wordType);
   wordCard.appendChild(wordEtymology);
   wordCard.appendChild(wordSentence);
