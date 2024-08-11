@@ -30,30 +30,32 @@ function fetchWordInfo(word) {
       for (const wordInfo of wordData) {
         console.log('wordInfo');
         console.log(wordInfo);
-        if (typeof wordInfo === 'object' && Object.keys(wordInfo).includes("hom")) {
-          console.log('in loop');
-          const wordObj = {};
-          //hw is the API identifier for the searched word
-          wordObj["headword"] = wordInfo.hwi.hw.replace(/\*/gi, "");
-          // retrieve word type, not within hwi object
-          wordObj["wordType"] = wordInfo.fl[0];
-          // in the case of homographs, wordInfo should be the first word (most relevant)
-
-          if ("prs" in wordInfo.hwi) {
-            if ("mw" in wordInfo.hwi.prs) {
-              wordObj["pronunciation"] = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
+        if (typeof wordInfo === 'object') {
+          if(Object.keys(wordInfo).includes("hom")){
+            console.log('in loop');
+            const wordObj = {};
+            //hw is the API identifier for the searched word
+            wordObj["headword"] = wordInfo.hwi.hw.replace(/\*/gi, "");
+            // retrieve word type, not within hwi object
+            wordObj["wordType"] = wordInfo.fl[0];
+            // in the case of homographs, wordInfo should be the first word (most relevant)
+  
+            if ("prs" in wordInfo.hwi) {
+              if ("mw" in wordInfo.hwi.prs) {
+                wordObj["pronunciation"] = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
+              }
+              if ("sound" in wordInfo.hwi.prs) {
+                wordObj["wordAudio"] = wordInfo.hwi.prs[0].sound.audio;
+              }
             }
-            if ("sound" in wordInfo.hwi.prs) {
-              wordObj["wordAudio"] = wordInfo.hwi.prs[0].sound.audio;
+  
+            if ("et" in wordInfo) {
+              wordObj["etymology"] = wordInfo.et[0];
             }
+  
+            getDefinitions(wordInfo, wordObj);
+            wordArray.push(wordObj);
           }
-
-          if ("et" in wordInfo) {
-            wordObj["etymology"] = wordInfo.et[0];
-          }
-
-          getDefinitions(wordInfo, wordObj);
-          wordArray.push(wordObj);
         }
       }
       console.log('wordArray');
