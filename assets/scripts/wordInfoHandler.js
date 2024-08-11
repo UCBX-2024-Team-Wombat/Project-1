@@ -44,7 +44,7 @@ function fetchWordInfo(word) {
         const wordArray = [];
 
         for (const wordInfo of wordData) {
-          if ("hom" in wordInfo) {
+          // if ("hom" in wordInfo) {
             const wordObj = {};
             //hw is the API identifier for the searched word
             wordObj["headword"] = wordInfo.hwi.hw.replace(/\*/gi, "");
@@ -70,7 +70,7 @@ function fetchWordInfo(word) {
             // const wordSentence = wordInfo.def.sseq[0].vis[0];
 
             wordArray.push(wordObj);
-          }
+          // }
         }
 
         console.log(wordArray);
