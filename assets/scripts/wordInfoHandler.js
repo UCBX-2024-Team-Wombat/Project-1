@@ -134,6 +134,9 @@ function writeWordInfo(wordArray){
   console.log('wordInfoDisplay');
   console.log(wordInfoDisplay);
   
+  console.log('wordArray');
+  console.log(wordArray);
+
   for(const wordInfo of wordArray){
     const wordCard = createWordCard(wordInfo);
     console.log('wordCard');
@@ -143,6 +146,7 @@ function writeWordInfo(wordArray){
 }
 
 function createWordCard(word) {
+  console.log('in word card');
   const wordCard = document.createElement("div");
   wordCard.classList.add("word-card");
 
@@ -179,8 +183,8 @@ function createWordCard(word) {
   wordCard.appendChild(wordSentence);
 
   // append word card to the HTML box/element
-  const wordInfoDiv = document.getElementById("word-info");
-  wordInfoDiv.appendChild(wordCard);
+  // const wordInfoDiv = document.getElementById("word-info");
+  // wordInfoDiv.appendChild(wordCard);
 
   return wordCard;
 }
