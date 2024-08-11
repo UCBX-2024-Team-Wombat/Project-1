@@ -30,6 +30,7 @@ function handleSearch(event) {
 function resetPage() {
   resetModal();
   resetGif();
+  resetWordInfo();
 }
 
 function isValidWord(word){

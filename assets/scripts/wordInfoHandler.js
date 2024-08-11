@@ -2,6 +2,7 @@
 
 const searchInputEl = document.getElementById("searched-word");
 const searchBtn = document.getElementById("search");
+const wordInfoElement = document.getElementById('word-info');
 const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
 const wordTypeMap = {
   'n': 'Noun',
@@ -89,6 +90,10 @@ function fetchWordInfo(word) {
     });
 }
 
+function resetWordInfo(){
+  wordInfoElement.innerText = null;
+}
+
 function getDefinitions(wordInfo, wordObj) {
   wordObj.definition = [];
 
@@ -144,18 +149,22 @@ function writeWordInfo(wordArray){
 
 function createWordCard(word) {
   const wordCard = document.createElement("div");
-  wordCard.classList.add("word-card");
+  wordCard.classList.add("card word-card");
 
-  // const wordName = document.createElement("div");
-  // wordName.classList.add("word-name");
-  // wordName.textContent = word.word;
-
+  // Construct word type
   const wordType = document.createElement("div");
   wordType.classList.add("word-type");
   const wordTypeText = word.wordType in Object.keys(wordTypeMap) ? wordTypeMap[word.wordType] : word.wordType;
   wordType.innerHTML = `Word Type: ${wordTypeText}`;
   wordCard.appendChild(wordType);
 
+  // Construct etymology
+  const wordEtymology = document.createElement("div");
+  wordEtymology.classList.add("word-etymology");
+  wordEtymology.textContent = `Etymology: ${word.etymology}`;
+  wordCard.appendChild(wordEtymology);
+
+  // Construct definitions
   const definitionsWrapper = document.createElement('div');
   definitionsWrapper.innerText = 'Definition(s)';
   const definitionUnorderedList = document.createElement('ul');
@@ -168,54 +177,6 @@ function createWordCard(word) {
 
   definitionsWrapper.appendChild(definitionUnorderedList);
   wordCard.appendChild(definitionsWrapper);
-  // const wordPronunciation = document.createElement("div");
-  // wordPronunciation.classList.add("word-pronunciation");
-  // wordPronunciation.textContent = word.pronunc;
-
-  // const wordAudioPronunciation = document.createElement("div");
-  // wordAudioPronunciation.classList.add("word-audio-pronunciation");
-  // wordAudioPronunciation.textContent = word.audio;
-
-  const wordEtymology = document.createElement("div");
-  wordEtymology.classList.add("word-etymology");
-  wordEtymology.textContent = `Etymology: ${word.etymology}`;
-  wordCard.appendChild(wordEtymology);
-
-  // const wordSentence = document.createElement("div");
-  // wordSentence.classList.add("word-sentence");
-  // wordSentence.textContent = word.example;
-
-  // append each word element to the word card
-  // wordCard.appendChild(wordName);
-  // wordCard.appendChild(wordPronunciation);
-  // wordCard.appendChild(wordAudioPronunciation);
-  // wordCard.appendChild(wordSentence);
-
-  // append word card to the HTML box/element
-  // const wordInfoDiv = document.getElementById("word-info");
-  // wordInfoDiv.appendChild(wordCard);
 
   return wordCard;
 }
-
-// not sure if this needs to be here
-// function renderWordInfo() {
-//   createWordCard();
-// }
-
-// function saveWordToStorage(wordInfo) {
-//   localStorage.setItem("wordInfo", JSON.stringify(wordInfo));
-// }
-
-// request URL: https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=948a3ec4-0862-47ce-bf63-b217e7cbcc75
-
-/* 
-File Explaination (To Delete):
-
-This file is responsible for collecting core word data, including
-- List of definitions
-  - part of speech for each definition
-  - "type of" information
-  - Sentence examples
-- Syllable info
-*/
