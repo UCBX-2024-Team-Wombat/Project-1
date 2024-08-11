@@ -9,6 +9,8 @@ const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
 function fetchWordInfo(word) {
   //set the URL for the fetch function
   const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`;
+  console.log('url');
+  console.log(url);
 
   fetch(url)
     .then(function (response) {
