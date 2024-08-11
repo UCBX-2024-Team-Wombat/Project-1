@@ -161,12 +161,12 @@ function createWordCard(word) {
   // Construct etymology
   const wordEtymology = document.createElement("div");
   wordEtymology.classList.add("word-etymology");
-  wordEtymology.textContent = `Etymology: ${word.etymology}`;
+  wordEtymology.textContent = `<span class='boldify'>Etymology</span>: ${word.etymology}`;
   wordCard.appendChild(wordEtymology);
 
   // Construct definitions
   const definitionsWrapper = document.createElement("div");
-  definitionsWrapper.innerText = "Definition(s)";
+  definitionsWrapper.innerText = "<span class='boldify'>Definition(s)</span>";
   const definitionUnorderedList = document.createElement("ul");
 
   for (const definition of word.definition) {
