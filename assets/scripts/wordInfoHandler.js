@@ -55,13 +55,11 @@ function fetchWordInfo(word) {
           wordArray.push(wordObj);
         }
       }
-      console.log('wordArray');
-      console.log(wordArray);
+
       if (wordArray.length == 0) {
-        wordInfoElement.style.fontStyle = "bold";
-        wordInfoElement.style.fontSize = "24px";
-        wordInfoElement.style.color = "red";
-        wordInfoElement.innerHTML =
+        const errorNotice = document.createElement('div');
+        errorNotice.setAttribute('class', 'word-info-error');
+        errorNotice.innerHTML =
           "<h3>No results found! Please check spelling and try again.</h3>";
       } else {
         writeWordInfo(wordArray);
@@ -70,7 +68,7 @@ function fetchWordInfo(word) {
 }
 
 function resetWordInfo() {
-  wordInfoElement.innerText = null;
+  wordInfoElement.innerHTML = null;
 }
 
 function getDefinitions(wordInfo, wordObj) {
