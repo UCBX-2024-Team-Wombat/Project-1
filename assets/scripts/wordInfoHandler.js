@@ -159,11 +159,9 @@ function createWordCard(word) {
   const definitionsWrapper = document.createElement('div');
   definitionsWrapper.innerText = 'Definition(s)';
   const definitionUnorderedList = document.createElement('ul');
-  definitionUnorderedList.classList.add('list');
 
   for(const definition of word.definition){
     const definitionListItem = document.createElement('li');
-    definitionListItem.classList.add('list-item');
     definitionListItem.innerText = definition;
     definitionUnorderedList.appendChild(definitionListItem);
   }
