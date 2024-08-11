@@ -51,11 +51,12 @@ function fetchWordInfo(word) {
           }
 
           getDefinitions(wordInfo, wordObj);
-
+          console.log('wordObj.definition');
+          console.log(wordObj.definition);
           wordArray.push(wordObj);
         }
       }
-      
+
       console.log('wordArray');
       console.log(wordArray);
 
