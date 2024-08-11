@@ -2,13 +2,13 @@
 
 const searchInputEl = document.getElementById("searched-word");
 const searchBtn = document.getElementById("search");
-const wordInfoElement = document.getElementById('word-info');
+const wordInfoElement = document.getElementById("word-info");
 const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
 const wordTypeMap = {
-  'n': 'Noun',
-  'a': 'Adjective',
-  'v': 'Verb'
-}
+  n: "Noun",
+  a: "Adjective",
+  v: "Verb",
+};
 
 // Functions
 
@@ -57,13 +57,13 @@ function fetchWordInfo(word) {
           }
 
           getDefinitions(wordInfo, wordObj);
-          console.log('wordObj.definition');
+          console.log("wordObj.definition");
           console.log(wordObj.definition);
           wordArray.push(wordObj);
         }
       }
 
-      console.log('wordArray');
+      console.log("wordArray");
       console.log(wordArray);
 
       if (wordArray.length == 0) {
@@ -72,23 +72,21 @@ function fetchWordInfo(word) {
         wordInfoElement.style.color = "red";
         wordInfoElement.innerHTML =
           "<h3>No results found! Please check spelling and try again.</h3>";
-      }
-      else {
+      } else {
         writeWordInfo(wordArray);
       }
     })
     .catch(function (error) {
-      console.log('error');
+      console.log("error");
       console.log(error);
       wordInfoElement.style.fontStyle = "bold";
       wordInfoElement.style.fontSize = "24px";
       wordInfoElement.style.color = "red";
-      wordInfoElement.innerHTML =
-        "<h3>Sorry, something went wrong.</h3>";
+      wordInfoElement.innerHTML = "<h3>Sorry, something went wrong.</h3>";
     });
 }
 
-function resetWordInfo(){
+function resetWordInfo() {
   wordInfoElement.innerText = null;
 }
 
@@ -123,7 +121,7 @@ function getDefinitions(wordInfo, wordObj) {
             for (const dtArrayValue of dt) {
               // If first value in dtArray is string "text",
               // get value in second index
-              console.log('dtArrayValue');
+              console.log("dtArrayValue");
               console.log(dtArrayValue);
               if (dtArrayValue[0] == "text") {
                 wordObj.definition.push(dtArrayValue[1]);
@@ -136,10 +134,10 @@ function getDefinitions(wordInfo, wordObj) {
   }
 }
 
-function writeWordInfo(wordArray){
-  const wordInfoDisplay = document.getElementById('results');
+function writeWordInfo(wordArray) {
+  const wordInfoDisplay = document.getElementById("results");
 
-  for(const wordInfo of wordArray){
+  for (const wordInfo of wordArray) {
     const wordCard = createWordCard(wordInfo);
     wordInfoDisplay.appendChild(wordCard);
   }
@@ -147,12 +145,15 @@ function writeWordInfo(wordArray){
 
 function createWordCard(word) {
   const wordCard = document.createElement("div");
-  wordCard.classList.add("card word-card");
+  wordCard.setAttribute("class", "card word-card");
 
   // Construct word type
   const wordType = document.createElement("div");
   wordType.classList.add("word-type");
-  const wordTypeText = word.wordType in Object.keys(wordTypeMap) ? wordTypeMap[word.wordType] : word.wordType;
+  const wordTypeText =
+    word.wordType in Object.keys(wordTypeMap)
+      ? wordTypeMap[word.wordType]
+      : word.wordType;
   wordType.innerHTML = `Word Type: ${wordTypeText}`;
   wordCard.appendChild(wordType);
 
@@ -163,12 +164,12 @@ function createWordCard(word) {
   wordCard.appendChild(wordEtymology);
 
   // Construct definitions
-  const definitionsWrapper = document.createElement('div');
-  definitionsWrapper.innerText = 'Definition(s)';
-  const definitionUnorderedList = document.createElement('ul');
+  const definitionsWrapper = document.createElement("div");
+  definitionsWrapper.innerText = "Definition(s)";
+  const definitionUnorderedList = document.createElement("ul");
 
-  for(const definition of word.definition){
-    const definitionListItem = document.createElement('li');
+  for (const definition of word.definition) {
+    const definitionListItem = document.createElement("li");
     definitionListItem.innerText = definition;
     definitionUnorderedList.appendChild(definitionListItem);
   }
