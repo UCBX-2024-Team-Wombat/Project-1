@@ -154,7 +154,8 @@ function createWordCard(word) {
     word.wordType in Object.keys(wordTypeMap)
       ? wordTypeMap[word.wordType]
       : word.wordType;
-  wordType.innerHTML = `Word Type: ${wordTypeText}`;
+  
+  wordType.innerHTML = `<span class='bolidify'>Word Type</span>: ${wordTypeText}`;
   wordCard.appendChild(wordType);
 
   // Construct etymology
