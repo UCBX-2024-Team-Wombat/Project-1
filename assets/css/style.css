@@ -58,3 +58,7 @@ body {
 .display-front {
     z-index: 100;
 }
+
+.word-card {
+    border-bottom: 1px solid gray;
+}

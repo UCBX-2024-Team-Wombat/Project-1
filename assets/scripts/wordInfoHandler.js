@@ -129,24 +129,15 @@ function getDefinitions(wordInfo, wordObj) {
 }
 
 function writeWordInfo(wordArray){
-  console.log('in writeWordInfo');
   const wordInfoDisplay = document.getElementById('results');
-  console.log('wordInfoDisplay');
-  console.log(wordInfoDisplay);
-  
-  console.log('wordArray');
-  console.log(wordArray);
 
   for(const wordInfo of wordArray){
     const wordCard = createWordCard(wordInfo);
-    console.log('wordCard');
-    console.log(wordCard);
     wordInfoDisplay.appendChild(wordCard);
   }
 }
 
 function createWordCard(word) {
-  console.log('in word card');
   const wordCard = document.createElement("div");
   wordCard.classList.add("word-card");
 
