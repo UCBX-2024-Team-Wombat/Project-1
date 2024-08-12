@@ -4,20 +4,17 @@ const searchInputEl = document.getElementById("searched-word");
 const searchBtn = document.getElementById("search");
 const wordInfoElement = document.getElementById("word-info");
 const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
-const wordTypeMap = {
-  n: "Noun",
-  a: "Adjective",
-  v: "Verb",
-};
 
-// Functions
-
+/* --------------------- Functions -------------------*/
+// get word data from API
 function fetchWordInfo(word) {
   //set the URL for the fetch function
   const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`;
 
+  // send HTTP request
   fetch(url)
     .then(function (response) {
+      // if the request fails, show the JSON error. Otherwise, return the successful promise
       if (!response.ok) {
         throw response.json();
       }
@@ -25,6 +22,7 @@ function fetchWordInfo(word) {
       return response.json();
     })
     .then(function (wordData) {
+      // empty array to store the different word elements we will retrieve
       const wordArray = [];
 
       for (const wordInfo of wordData) {
@@ -36,11 +34,11 @@ function fetchWordInfo(word) {
             //hw is the API identifier for the searched word
             wordObj["headword"] = wordInfo.hwi.hw.replace(/\*/gi, "");
             // retrieve word type, not within hwi object
-            wordObj["wordType"] = wordInfo.fl[0];
+            wordObj["wordType"] = wordInfo.fl;
             // prs is the API keyword for pronunciation
             if ("prs" in wordInfo.hwi) {
               if ("mw" in wordInfo.hwi.prs) {
-                wordObj["pronunciation"] = wordInfo.hwi.prs[0].mw; // wod = word of the day MW format
+                wordObj["pronunciation"] = wordInfo.hwi.prs[0].mw; // mw = Merriam-Webster format
               }
               if ("sound" in wordInfo.hwi.prs) {
                 wordObj["wordAudio"] = wordInfo.hwi.prs[0].sound.audio;
@@ -111,6 +109,7 @@ function getDefinitions(wordInfo, wordObj) {
               console.log("dtArrayValue");
               console.log(dtArrayValue);
               if (dtArrayValue[0] == "text") {
+                // regular expression created to remove excess notations for easier reading
                 wordObj.definition.push(
                   dtArrayValue[1].replace(
                     /\{bc\}|\{dx_ety\}.*?\{\/dx_ety\}|\{dx_def\}.*?\{\/dx_def\}|\{.*?\||\|\|\}|\|.*?\}|\|\|.*?\}|\}/g, "")
@@ -137,15 +136,11 @@ function createWordCard(word) {
   const wordCard = document.createElement("div");
   wordCard.setAttribute("class", "card word-card");
 
-  // Construct word type
-  const wordType = document.createElement("div");
-  wordType.classList.add("word-type");
-  const wordTypeText = Object.keys(wordTypeMap).includes(word.wordType)
-    ? wordTypeMap[word.wordType]
-    : word.wordType;
-
-  wordType.innerHTML = `<span class='boldify'>Word Type</span>: ${wordTypeText}`;
-  wordCard.appendChild(wordType);
+  // Construct word type (POS = part of speech)
+  const wordPOS = document.createElement("div");
+  wordPOS.classList.add("word-type");
+  wordPOS.innerHTML = `<span class='boldify'>Word Type</span>: ${word.wordType}`;
+  wordCard.appendChild(wordPOS);
 
   // Construct etymology
   const wordEtymology = document.createElement("div");
