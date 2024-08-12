@@ -5,6 +5,8 @@ const searchBtn = document.getElementById("search");
 const wordInfoElement = document.getElementById("word-info");
 const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
 
+const invalidInputs = [null, undefined, ' ']
+
 /* --------------------- Functions -------------------*/
 // get word data from API
 function fetchWordInfo(word) {
@@ -28,33 +30,40 @@ function fetchWordInfo(word) {
       for (const wordInfo of wordData) {
 
         if (typeof wordInfo === "object") {
+          // conditions for successful search:
+          // if searched word has homonyms OR searched word matches the API meta id
           if (Object.keys(wordInfo).includes("hom") ||
               wordInfo['meta']['id'] == word ) {
+            // create word object to store word keys
             const wordObj = {};
-            //hw is the API identifier for the searched word
+            //hw = API identifier for the searched word
             wordObj["headword"] = wordInfo.hwi.hw.replace(/\*/gi, "");
-            // retrieve word type, not within hwi object
+            // retrieve word type (part of speech)
             wordObj["wordType"] = wordInfo.fl;
-            // prs is the API keyword for pronunciation
+            // prs = API identifier for pronunciation
             if ("prs" in wordInfo.hwi) {
-              if ("mw" in wordInfo.hwi.prs) {
+              // mw = written pronunciation format
+              if ("mw" in wordInfo.hwi.prs[0]) {
                 wordObj["pronunciation"] = wordInfo.hwi.prs[0].mw; // mw = Merriam-Webster format
               }
-              if ("sound" in wordInfo.hwi.prs) {
-                wordObj["wordAudio"] = wordInfo.hwi.prs[0].sound.audio;
+              // audio = verbal pronunciation, using audio link format 
+              if ("sound" in wordInfo.hwi.prs[0]) {
+                wordObj["wordAudio"] = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${word.charAt(0)}/${wordInfo.hwi.prs[0].sound.audio}.mp3`;
               }
             }
-
+            // et = API identifier for etymology
             if ("et" in wordInfo) {
               wordObj["etymology"] = wordInfo.et[0];
             }
-
+            // call function to retrieve all definitions and add the 
+            // entire word object to the array
             getDefinitions(wordInfo, wordObj);
             wordArray.push(wordObj);
           }
         }
       }
 
+      // do we need this error checking here is it is being done in index.js?
       if (wordArray.length == 0) {
         const errorNotice = document.createElement("h3");
         errorNotice.innerText =
@@ -67,10 +76,12 @@ function fetchWordInfo(word) {
     });
 }
 
+// save the searched word data to local storage
 function saveToLocalStorage(wordInfo) {
   localStorage.setItem("wordInfo", JSON.stringify(wordInfo));
 }
 
+// reset the section under "Word Info" title to blank
 function resetWordInfo() {
   wordInfoElement.innerHTML = null;
 }
@@ -122,16 +133,17 @@ function getDefinitions(wordInfo, wordObj) {
     }
   }
 }
-
+// render word details to the webpage
 function writeWordInfo(wordArray) {
   const wordInfoDisplay = document.getElementById("word-info");
-
+  // for every word found in the API, render a word card
   for (const wordInfo of wordArray) {
     const wordCard = createWordCard(wordInfo);
     wordInfoDisplay.appendChild(wordCard);
   }
 }
 
+// render word data to the webpage
 function createWordCard(word) {
   const wordCard = document.createElement("div");
   wordCard.setAttribute("class", "card word-card");
@@ -141,6 +153,12 @@ function createWordCard(word) {
   wordPOS.classList.add("word-type");
   wordPOS.innerHTML = `<span class='boldify'>Word Type</span>: ${word.wordType}`;
   wordCard.appendChild(wordPOS);
+
+  // Construct pronunciation, written and audio
+  const wordPronunciation = document.createElement("div");
+  wordPronunciation.classList.add("word-pronunciation");
+  wordPronunciation.innerHTML = `<span class='boldify'>Pronunciation</span>: ${word.pronunciation} (<a href="${word.wordAudio}" target="_blank">Click to listen</a>)`;
+  wordCard.appendChild(wordPronunciation);
 
   // Construct etymology
   const wordEtymology = document.createElement("div");
@@ -153,12 +171,14 @@ function createWordCard(word) {
   definitionsWrapper.innerHTML = "<span class='boldify'>Definition(s)</span>";
   const definitionUnorderedList = document.createElement("ul");
 
+  // add each definition on the webpage as a list item
   for (const definition of word.definition) {
     const definitionListItem = document.createElement("li");
     definitionListItem.innerHTML = definition;
     definitionUnorderedList.appendChild(definitionListItem);
   }
 
+  // append definition list to word card
   definitionsWrapper.appendChild(definitionUnorderedList);
   wordCard.appendChild(definitionsWrapper);
 
