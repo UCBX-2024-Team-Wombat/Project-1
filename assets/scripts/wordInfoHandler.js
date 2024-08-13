@@ -33,8 +33,10 @@ function fetchWordInfo(word) {
         if (typeof wordInfo === "object") {
           // conditions for successful search:
           // if searched word has homonyms OR searched word matches the API meta id
-          if (Object.keys(wordInfo).includes("hom") ||
-              wordInfo['meta']['id'] == word ) {
+          if (
+            wordInfo["meta"]["stems"][0] == word ||
+            wordInfo["meta"]["id"] == word
+          ) {
             // create word object to store word keys
             const wordObj = {};
             //hw = API identifier for the searched word
@@ -46,25 +48,31 @@ function fetchWordInfo(word) {
             wordObj["wordAudio"] = [];
             wordObj["pronunciation"] = []; // mw = Merriam-Webster format
             if ("prs" in wordInfo.hwi) {
-              for(const prsValue of wordInfo.hwi.prs){
+              for (const prsValue of wordInfo.hwi.prs) {
                 // mw = written pronunciation format
                 if ("mw" in prsValue) {
                   wordObj["pronunciation"].push(prsValue.mw); // mw = Merriam-Webster format
                 }
-                // audio = verbal pronunciation, using audio link format 
+                // audio = verbal pronunciation, using audio link format
                 if ("sound" in prsValue) {
-                  wordObj["wordAudio"].push(`https://media.merriam-webster.com/audio/prons/en/us/mp3/${word.charAt(0)}/${prsValue.sound.audio}.mp3`);
+                  wordObj["wordAudio"].push(
+                    `https://media.merriam-webster.com/audio/prons/en/us/mp3/${word.charAt(
+                      0
+                    )}/${prsValue.sound.audio}.mp3`
+                  );
                 }
               }
             }
             // et = API identifier for etymology
             if ("et" in wordInfo) {
               wordObj["etymology"] = wordInfo.et[0][1].replace(
-                /\{it\}|\{\/it\}|\{ma\}.*?\{\/ma\}|\{et_link\||\:.*?\}|\{dx_ety\}|\{dxt\||\{\/dx_ety\}|\{dx\}|\|\|\}|\{\/dx\}/g, "");
+                /\{it\}|\{\/it\}|\{ma\}.*?\{\/ma\}|\{et_link\||\:.*?\}|\{dx_ety\}|\{dxt\||\{\/dx_ety\}|\{dx\}|\|\|\}|\{\/dx\}/g,
+                ""
+              );
             } else {
               wordObj["etymology"] = "see first entry";
             }
-            // call function to retrieve all definitions and add the 
+            // call function to retrieve all definitions and add the
             // entire word object to the array
             getDefinitions(wordInfo, wordObj);
             wordArray.push(wordObj);
