@@ -1,4 +1,4 @@
-# 📚 WORD GAME
+# 📚 WORDNERD
 
 ## 💡 Table of Contents
 
@@ -48,7 +48,7 @@ npm install
 
 To use the application, open the index.html file in your browser. Input a word, click the "Search" button to fetch word information, or click the "Show Related Words" button to view synonyms and antonyms in the modal.
 
-## File Structure
+##  🗄️ File Structure
 
 ├── assets/
 │   ├── css/
@@ -64,7 +64,23 @@ To use the application, open the index.html file in your browser. Input a word, 
 
 ## Technology Used
 
-* 
+* HTML5: Markup language
+* CSS3: For styling
+* JavaScript: For interactivity
+* Bulma: CSS framework for styling
+* Node.js: For running scripts 
+
+## 🤝 Contributing
+If you wish to contribute to this project, please fork the repository and use a feature branch. Pull requests are warmly welcome.
+
+## 📝 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+##  🙌 Acknowledgments
+
+Thanks to Bulma for their great CSS framework.
+Special thanks to any contributors or inspiration sources.
 
 
 
