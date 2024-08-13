@@ -60,7 +60,9 @@ function fetchWordInfo(word) {
             // et = API identifier for etymology
             if ("et" in wordInfo) {
               wordObj["etymology"] = wordInfo.et[0][1].replace(
-                /\{it\}|\{\/it\}|\{ma\}.*?\{\/ma\}|\{et_link\||\:.*?\}|\{dx_ety\}|\{dxt\||\{\/dx_ety\}/g, "");
+                /\{it\}|\{\/it\}|\{ma\}.*?\{\/ma\}|\{et_link\||\:.*?\}|\{dx_ety\}|\{dxt\||\{\/dx_ety\}|\{dx\}|\|\|\}|\{\/dx\}/g, "");
+            } else {
+              wordObj["etymology"] = "see first entry";
             }
             // call function to retrieve all definitions and add the 
             // entire word object to the array
@@ -129,7 +131,7 @@ function getDefinitions(wordInfo, wordObj) {
                 // regular expression created to remove excess notations for easier reading
                 wordObj.definition.push(
                   dtArrayValue[1].replace(
-                    /\{bc\}|\{dx_ety\}.*?\{\/dx_ety\}|\{dx_def\}.*?\{\/dx_def\}|\{.*?\||\|\|\}|\|.*?\}|\|\|.*?\}|\}/g, "")
+                    /\{bc\}|\{dx_ety\}.*?\{\/dx_ety\}|\{dx_def\}.*?\{\/dx_def\}|\{.*?\||\|\|\}|\|.*?\}|\|\|.*?\}|\}|\{dxt\||\{dx\}|\{\/dx\}|\{it\}|\{\/it\}/g, "")
                 );
               }
             }
