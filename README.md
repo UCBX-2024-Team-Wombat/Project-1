@@ -32,7 +32,7 @@ This project is a web application designed to enhance vocabulary exploration. Us
 
 * 1. Clone the repository:
 
-git clone https://github.com/jvalliswalker/UCBX-2024-Team-Wombat.git
+git clone https://github.com/UCBX-2024-Team-Wombat/Project-1
 
 * 2. Navigate to the project directory: 
 
@@ -69,6 +69,7 @@ To use the application, open the index.html file in your browser. Input a word, 
 * JavaScript: For interactivity
 * Bulma: CSS framework for styling
 * Node.js: For running scripts 
+* JSON, Thesaurus API,  GIPHY API 
 
 ## 🤝 Contributing
 If you wish to contribute to this project, please fork the repository and use a feature branch. Pull requests are warmly welcome.
@@ -79,7 +80,8 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ##  🙌 Acknowledgments
 
-Thanks to Bulma for their great CSS framework.
+Thanks to Bulma for their great CSS framework, Merriam-Webster's Collegiate® Thesaurus, API Ninjas and Giphy Devolopers for their great API.
+
 Special thanks to any contributors or inspiration sources.
 
 
