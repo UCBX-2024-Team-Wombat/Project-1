@@ -37,7 +37,9 @@
                 type="text"
                 placeholder="Type here..."
               />
-              <div id="invalid-word-notice" class="has-text-danger" hidden>Invalid word. Please try another</div>
+              <div id="invalid-word-notice" class="has-text-danger" hidden>
+                Invalid word. Please try another
+              </div>
               <button id="search" class="button is-primary is-fullwidth mt-2">
                 Search
               </button>
@@ -65,9 +67,11 @@
         </div>
       </div>
       <div class="main-content card ml-4">
+        <header class="card-header">
+          <p class="card-header-title">Word Info</p>
+        </header>
         <div class="card-content">
-          <div class="title is-5">Definitions list</div>
-          <div>(definitions, example sentences, etc.)</div>
+          <p id="word-info">(definitions, example sentences, etc.)</p>
         </div>
       </div>
     </div>
