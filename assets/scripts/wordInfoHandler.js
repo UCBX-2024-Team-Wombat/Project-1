@@ -4,7 +4,7 @@ const searchInputEl = document.getElementById("searched-word");
 const searchBtn = document.getElementById("search");
 const wordInfoElement = document.getElementById("word-info");
 const wordTitleEl = document.querySelector(".card-header-title");
-const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
+const wordInfoLocalStorageKey = "project-1-word-info";
 
 const invalidInputs = [null, undefined, ' ']
 
@@ -12,7 +12,7 @@ const invalidInputs = [null, undefined, ' ']
 // get word data from API
 function fetchWordInfo(word) {
   //set the URL for the fetch function
-  const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${apiKey}`;
+  const url = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${word}?key=${getWordInfoApiKey()}`;
 
   // send HTTP request
   fetch(url)
@@ -211,4 +211,14 @@ function createWordCard(word) {
   wordCard.appendChild(definitionsWrapper);
 
   return wordCard;
+}
+
+// function to enter the API key into the console
+function storeWordInfoAPIKey(apiKey) {
+  localStorage.setItem(relatedWordsLocalStorageKey, apiKey);
+}
+
+// retrieve stored key, to be inserted into API url
+function getWordInfoApiKey() {
+  return localStorage.getItem(relatedWordsLocalStorageKey);
 }
