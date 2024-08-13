@@ -9,10 +9,8 @@ searchButton.addEventListener("click", handleSearch);
 // Functions
 function handleSearch(event) {
   const searchedWord = searchInput.value.trim();
-  console.log('searchedWord');
-  console.log(searchedWord);
+
   if(isValidWord(searchedWord)){
-    console.log('word is valid');
     
     hideInvalidWordNotice();
     resetPage();
@@ -21,7 +19,6 @@ function handleSearch(event) {
     fetchWordGif(searchedWord);
   }
   else {
-    console.log('word is invalid');
     displayInvalidWordNotice();
   }
 }
