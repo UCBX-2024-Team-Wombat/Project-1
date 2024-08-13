@@ -53,7 +53,8 @@ function fetchWordInfo(word) {
             }
             // et = API identifier for etymology
             if ("et" in wordInfo) {
-              wordObj["etymology"] = wordInfo.et[0];
+              wordObj["etymology"] = wordInfo.et[0][1].replace(
+                /\{it\}|\{\/it\}|\{ma\}.*?\{\/ma\}/g, "");
             }
             // call function to retrieve all definitions and add the 
             // entire word object to the array
@@ -63,13 +64,14 @@ function fetchWordInfo(word) {
         }
       }
 
-      // do we need this error checking here is it is being done in index.js?
+      //this checks that whether there are entries in the API for the input
       if (wordArray.length == 0) {
         const errorNotice = document.createElement("h3");
         errorNotice.innerText =
           "No results found. Please check spelling and try again.";
         wordInfoElement.appendChild(errorNotice);
       } else {
+        // if word has an entry in the API, render the word info
         writeWordInfo(wordArray);
         saveToLocalStorage(wordArray);
       }
