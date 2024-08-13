@@ -3,6 +3,7 @@
 const searchInputEl = document.getElementById("searched-word");
 const searchBtn = document.getElementById("search");
 const wordInfoElement = document.getElementById("word-info");
+const wordTitleEl = document.querySelector(".card-header-title");
 const apiKey = "948a3ec4-0862-47ce-bf63-b217e7cbcc75";
 
 const invalidInputs = [null, undefined, ' ']
@@ -59,7 +60,7 @@ function fetchWordInfo(word) {
             // et = API identifier for etymology
             if ("et" in wordInfo) {
               wordObj["etymology"] = wordInfo.et[0][1].replace(
-                /\{it\}|\{\/it\}|\{ma\}.*?\{\/ma\}/g, "");
+                /\{it\}|\{\/it\}|\{ma\}.*?\{\/ma\}|\{et_link\||\:.*?\}|\{dx_ety\}|\{dxt\||\{\/dx_ety\}/g, "");
             }
             // call function to retrieve all definitions and add the 
             // entire word object to the array
@@ -76,16 +77,13 @@ function fetchWordInfo(word) {
           "No results found. Please check spelling and try again.";
         wordInfoElement.appendChild(errorNotice);
       } else {
-        // if word has an entry in the API, render the word info
+        // if word has an entry in the API, render the word info and clear the input field
         writeWordInfo(wordArray);
-        saveToLocalStorage(wordArray);
+        searchInputEl.value = null;
+        const wordHeader = "Word Info for";
+        wordTitleEl.textContent = `${wordHeader} ${word}`
       }
     });
-}
-
-// save the searched word data to local storage
-function saveToLocalStorage(wordInfo) {
-  localStorage.setItem("wordInfo", JSON.stringify(wordInfo));
 }
 
 // reset the section under "Word Info" title to blank
@@ -93,6 +91,7 @@ function resetWordInfo() {
   wordInfoElement.innerHTML = null;
 }
 
+// retrieve all definitions for the searched word
 function getDefinitions(wordInfo, wordObj) {
   wordObj.definition = [];
 
