@@ -174,14 +174,17 @@ function createWordCard(word) {
     const wordPronunciation = document.createElement("div");
     wordPronunciation.classList.add("word-pronunciation");
     wordPronunciation.innerHTML = `<div class='boldify'>Pronunciation</div>`;
+    // create list to store different pronunciations
     const pronunciationList = document.createElement('ul');
-  
+    
+    // construct pronunciation list item(s)
     for (let i = 0; i < word.pronunciation.length; i++) {
       const listItem = document.createElement('li');
       listItem.innerHTML = `${word.pronunciation[i]} (<a href="${word.wordAudio[i]}" target="_blank">Click to listen</a>)`;
       pronunciationList.appendChild(listItem)
     }
-  
+    
+    // add pronunciation list items to word card
     wordPronunciation.appendChild(pronunciationList);
     wordCard.appendChild(wordPronunciation);
   }
