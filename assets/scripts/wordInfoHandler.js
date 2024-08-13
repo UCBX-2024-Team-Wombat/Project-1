@@ -41,14 +41,19 @@ function fetchWordInfo(word) {
             // retrieve word type (part of speech)
             wordObj["wordType"] = wordInfo.fl;
             // prs = API identifier for pronunciation
+
+            wordObj["wordAudio"] = [];
+            wordObj["pronunciation"] = []; // mw = Merriam-Webster format
             if ("prs" in wordInfo.hwi) {
-              // mw = written pronunciation format
-              if ("mw" in wordInfo.hwi.prs[0]) {
-                wordObj["pronunciation"] = wordInfo.hwi.prs[0].mw; // mw = Merriam-Webster format
-              }
-              // audio = verbal pronunciation, using audio link format 
-              if ("sound" in wordInfo.hwi.prs[0]) {
-                wordObj["wordAudio"] = `https://media.merriam-webster.com/audio/prons/en/us/mp3/${word.charAt(0)}/${wordInfo.hwi.prs[0].sound.audio}.mp3`;
+              for(const prsValue of wordInfo.hwi.prs){
+                // mw = written pronunciation format
+                if ("mw" in prsValue) {
+                  wordObj["pronunciation"].push(prsValue.mw); // mw = Merriam-Webster format
+                }
+                // audio = verbal pronunciation, using audio link format 
+                if ("sound" in prsValue) {
+                  wordObj["wordAudio"].push(`https://media.merriam-webster.com/audio/prons/en/us/mp3/${word.charAt(0)}/${prsValue.sound.audio}.mp3`);
+                }
               }
             }
             // et = API identifier for etymology
@@ -157,10 +162,22 @@ function createWordCard(word) {
   wordCard.appendChild(wordPOS);
 
   // Construct pronunciation, written and audio
-  const wordPronunciation = document.createElement("div");
-  wordPronunciation.classList.add("word-pronunciation");
-  wordPronunciation.innerHTML = `<span class='boldify'>Pronunciation</span>: ${word.pronunciation} (<a href="${word.wordAudio}" target="_blank">Click to listen</a>)`;
-  wordCard.appendChild(wordPronunciation);
+
+  if(word.pronunciation.length > 0){
+    const wordPronunciation = document.createElement("div");
+    wordPronunciation.classList.add("word-pronunciation");
+    wordPronunciation.innerHTML = `<div class='boldify'>Pronunciation</div>`;
+    const pronunciationList = document.createElement('ul');
+  
+    for (let i = 0; i < word.pronunciation.length; i++) {
+      const listItem = document.createElement('li');
+      listItem.innerHTML = `${word.pronunciation[i]} (<a href="${word.wordAudio[i]}" target="_blank">Click to listen</a>)`;
+      pronunciationList.appendChild(listItem)
+    }
+  
+    wordPronunciation.appendChild(pronunciationList);
+    wordCard.appendChild(wordPronunciation);
+  }
 
   // Construct etymology
   const wordEtymology = document.createElement("div");
