@@ -6,8 +6,6 @@ const wordInfoElement = document.getElementById("word-info");
 const wordTitleEl = document.querySelector(".card-header-title");
 const wordInfoLocalStorageKey = "project-1-word-info";
 
-const invalidInputs = [null, undefined, ' ']
-
 /* --------------------- Functions -------------------*/
 // get word data from API
 function fetchWordInfo(word) {
@@ -215,10 +213,10 @@ function createWordCard(word) {
 
 // function to enter the API key into the console
 function storeWordInfoAPIKey(apiKey) {
-  localStorage.setItem(relatedWordsLocalStorageKey, apiKey);
+  localStorage.setItem(wordInfoLocalStorageKey, apiKey);
 }
 
 // retrieve stored key, to be inserted into API url
 function getWordInfoApiKey() {
-  return localStorage.getItem(relatedWordsLocalStorageKey);
+  return localStorage.getItem(wordInfoLocalStorageKey);
 }
