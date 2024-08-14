@@ -69,30 +69,102 @@ ul {
     z-index: 100; /* Ensures the element stays in front of other elements with a lower z-index */
 }
 
+/* Standard padding for wrod info cards */
 .word-card {
     padding: 10px;
     margin-bottom: 10px;
 }
 
+/* Add bold font weight */
 .boldify {
     font-weight: bold;
 }
 
+/* Custom styling for bulma dropdown */
 .dropdown-content-custom {
     max-height: 200px;
     overflow-y: scroll;
-}
-
-.custom-dropdown-content-hover {
-    background-color: #f5f5f5;
-    color: #0a0a0a;
 }
 
 .dropdown {
     display: inline;
 }
 
+/* Styling for symbol to resize */
 .github-symbol {
     height: 35px;
     width: auto;
+}
+
+/* Create spacing at desktop size */
+.main-content {
+    margin-left: 10px;
+}
+
+/* Override Bulma for desired modal display */
+.modal-card, .modal-content {
+    margin: 0 auto;
+    width: 80%;
+}
+
+/* Override bulma columns effects for specified section */
+#related-words-display {
+    display: flex;
+}
+
+
+/* Media query for tablet size */
+@media (max-width: 900px) {
+    /* Moves word info below word-search and gif cards */
+    .responsive-content-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Moves gif card next to search card  */
+    .responsive-sidebar {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+    }
+
+    /* Resize margin on search card for new gif card location */
+    #search-card {
+        margin-right: 10px;
+    }
+
+    /* Resize word info card */
+    .main-content {
+        width: 100%;
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+    /* Remove scrolling for word info card */
+    .main-content .card-content {
+        max-height: fit-content;
+        overflow-y: visible;
+    }
+}
+    
+@media (max-width: 620px) {
+    /* Move gif card back to below search card */
+    .responsive-sidebar {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    /* Remove search margin as gif is moved to below */
+    #search-card {
+        margin-right: 0px;
+    }
+
+}
+
+@media (max-width: 500px){
+    /* Change to inline display at small scale */
+    #related-words-display {
+        display: inline;
+    }
 }
