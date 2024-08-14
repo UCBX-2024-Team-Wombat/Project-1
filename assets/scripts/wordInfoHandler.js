@@ -87,7 +87,6 @@ function fetchWordInfo(word) {
       } else {
         // if word has an entry in the API, render the word info and clear the input field
         writeWordInfo(wordArray);
-        searchInputEl.value = null;
         const wordHeader = "Word Info for";
         wordTitleEl.textContent = `${wordHeader} ${word}`
       }
