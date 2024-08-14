@@ -101,8 +101,17 @@ ul {
     margin-left: 10px;
 }
 
-#search-input-and-button {
+/* Override Bulma for desired modal display */
+.modal-card, .modal-content {
+    margin: 0 auto;
+    width: 80%;
 }
+
+/* Override bulma columns effects for specified section */
+#related-words-display {
+    display: flex;
+}
+
 
 /* Media query for tablet size */
 @media (max-width: 900px) {
@@ -137,7 +146,7 @@ ul {
         overflow-y: visible;
     }
 }
-
+    
 @media (max-width: 620px) {
     /* Move gif card back to below search card */
     .responsive-sidebar {
@@ -149,5 +158,13 @@ ul {
     /* Remove search margin as gif is moved to below */
     #search-card {
         margin-right: 0px;
+    }
+
+}
+
+@media (max-width: 500px){
+    /* Change to inline display at small scale */
+    #related-words-display {
+        display: inline;
     }
 }
