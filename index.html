@@ -39,12 +39,22 @@
             </p>
             <div>
               <!-- Input field for the word search -->
-              <input
-                class="input mt-2"
-                id="searched-word"
-                type="text"
-                placeholder="Type here..."
-              />
+               <!-- Dropdown source from bulma: https://bulma.io/documentation/components/dropdown/ -->
+               <div class="dropdown" id="dropdown-wrapper">
+                <div class="dropdown-trigger">
+                    <input
+                    class="input mt-2 dropdown"
+                    id="searched-word"
+                    type="text"
+                    placeholder="Type here..."
+                  />
+                  </button>
+                </div>
+                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                  <div class="dropdown-content dropdown-content-custom" id="search-history-dropdown-content">
+                  </div>
+                </div>
+              </div>
               <!-- Notice displayed when an invalid word is entered -->
               <div id="invalid-word-notice" class="has-text-danger" hidden>Invalid word. Please try another</div>
              <!-- Search Button -->
