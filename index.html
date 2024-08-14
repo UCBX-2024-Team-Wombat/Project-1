@@ -5,24 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>WordNerd</title>
+    /* Linking Bulma CSS Framework */
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css"
     />
+    /* Linking Custom CSS */
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
+    /*  Site Header  */
     <header class="site-header has-background-primary">
       <div
         class="container is-flex is-justify-content-space-between is-align-items-center"
       >
+      /* Site Logo */
         <div class="logo">
           <h1 class="title has-text-white">WordNerd</h1>
         </div>
       </div>
     </header>
+    /* Main Container for Sidebar and Main Content */
     <div class="container is-flex">
+      /* Sidebar Section */
       <div class="sidebar">
+    /* Search Card */    
         <div class="card">
           <div class="card-content">
             <p class="title is-5">Search for a word!</p>
@@ -31,21 +38,23 @@
               about the word
             </p>
             <div>
+              /* Input field for the word search */
               <input
                 class="input mt-2"
                 id="searched-word"
                 type="text"
                 placeholder="Type here..."
               />
-              <div id="invalid-word-notice" class="has-text-danger" hidden>
-                Invalid word. Please try another
-              </div>
+              /* Notice displayed when an invalid word is entered */
+              <div id="invalid-word-notice" class="has-text-danger" hidden>Invalid word. Please try another</div>
+             /* Search Button */
               <button id="search" class="button is-primary is-fullwidth mt-2">
                 Search
               </button>
             </div>
           </div>
         </div>
+        /* Related Words Modal Button (hidden at the beginning) */
         <div id="modal-button-wrapper" hidden>
           <button
             id="related-words-modal-button"
@@ -54,10 +63,12 @@
             Show Related Words
           </button>
         </div>
+        /* Gif Display Card */
         <div class="card mt-3">
           <div class="card-content">
             <p class="title is-5">Gif It!</p>
             <div>
+              /* Placeholder for the gif that will be displayed after a word is searched */
               <p id="gif-embed-slot" class="">
                 Once you choose a word, a random gif for that word will appear
                 here
@@ -66,6 +77,7 @@
           </div>
         </div>
       </div>
+      /* Main Content Section */
       <div class="main-content card ml-4">
         <header class="card-header">
           <p class="card-header-title">Word Info</p>
@@ -75,23 +87,29 @@
         </div>
       </div>
     </div>
+    /* Modal for Displaying Related Words */
     <div class="modal display-front" id="relatedWordsModal">
       <div class="modal-background"></div>
       <div class="modal-card">
         <header class="modal-card-head">
+          /* Modal Title  */
           <p class="modal-card-title">Related Words</p>
+          /* modal close button */
           <button class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body modal-body scroll-overflow">
+          /* Related Words Displaying Container */
           <div id="related-words-display"></div>
         </section>
         <footer class="modal-card-foot">
           <div class="buttons is-right">
+            /* Back Button (modal footer) */
             <a class="button">Back</a>
           </div>
         </footer>
       </div>
     </div>
+    /* Java script file sourses to include them */
     <script src="assets/scripts/wordInfoHandler.js"></script>
     <script src="assets/scripts/wordGifHandler.js"></script>
     <script src="assets/scripts/relatedWordsHandler.js"></script>
