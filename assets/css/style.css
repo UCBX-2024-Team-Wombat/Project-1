@@ -96,3 +96,30 @@ ul {
     height: 35px;
     width: auto;
 }
+
+.main-content {
+    margin-left: 10px;
+}
+
+@media (max-width: 900px) {
+    .responsive-content-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .responsive-sidebar {
+        display: flex;
+        flex-direction: row;
+        margin-bottom: 10px;
+    }
+
+    .main-content {
+        width: 100%;
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+    #search-card {
+        margin-right: 10px;
+    }
+}

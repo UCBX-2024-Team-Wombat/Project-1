@@ -31,77 +31,80 @@
       </div>
     </header>
     <!-- Main Container for Sidebar and Main Content -->
-    <div class="container is-flex">
+    <div class="container is-flex responsive-content-section">
       <!-- Sidebar Section -->
-      <div class="sidebar">
-    <!-- Search Card -->    
-        <div class="card">
-          <div class="card-content">
-            <p class="title is-5">Search for a word!</p>
-            <p>
-              Type a word below and hit search. We'll return lots of fun data
-              about the word
-            </p>
-            <div>
-              <!-- Input field for the word search -->
-               <!-- Dropdown source from bulma: https://bulma.io/documentation/components/dropdown/ -->
-               <div class="dropdown" id="dropdown-wrapper">
-                <div class="dropdown-trigger">
-                    <input
-                    class="input mt-2 dropdown"
-                    id="searched-word"
-                    type="text"
-                    placeholder="Type here..."
-                  />
-                  </button>
-                </div>
-                <div class="dropdown-menu" id="dropdown-menu" role="menu">
-                  <div class="dropdown-content dropdown-content-custom" id="search-history-dropdown-content">
-                  </div>
-                </div>
-              </div>
-              <!-- Notice displayed when an invalid word is entered -->
-              <div id="invalid-word-notice" class="has-text-danger" hidden>Invalid word. Please try another</div>
-             <!-- Search Button -->
-              <button id="search" class="button is-primary is-fullwidth mt-2">
-                Search
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- Related Words Modal Button (hidden at the beginning) -->
-        <div id="modal-button-wrapper" hidden>
-          <button
-            id="related-words-modal-button"
-            class="button is-primary mt-3 is-fullwidth"
-          >
-            Show Related Words
-          </button>
-        </div>
-        <!--  Gif Display Card -->
-        <div class="card mt-3">
-          <div class="card-content">
-            <p class="title is-5">Gif It!</p>
-            <div>
-              <!-- Placeholder for the gif that will be displayed after a word is searched -->
-              <p id="gif-embed-slot" class="">
-                Once you choose a word, a random gif for that word will appear
-                here
-              </p>
-            </div>
-          </div>
-        </div>
+      <div class="">
+        <!-- Search Card -->
+         <div class="responsive-sidebar">
+             <div class="card" id="search-card">
+               <div class="card-content">
+                 <p class="title is-5">Search for a word!</p>
+                 <p>
+                   Type a word below and hit search. We'll return lots of fun data
+                   about the word
+                 </p>
+                 <div>
+                   <!-- Input field for the word search -->
+                    <!-- Dropdown source from bulma: https://bulma.io/documentation/components/dropdown/ -->
+                    <div class="dropdown" id="dropdown-wrapper">
+                     <div class="dropdown-trigger">
+                         <input
+                         class="input mt-2 dropdown"
+                         id="searched-word"
+                         type="text"
+                         placeholder="Type here..."
+                       />
+                       </button>
+                     </div>
+                     <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                       <div class="dropdown-content dropdown-content-custom" id="search-history-dropdown-content">
+                       </div>
+                     </div>
+                   </div>
+                   <!-- Notice displayed when an invalid word is entered -->
+                   <div id="invalid-word-notice" class="has-text-danger" hidden>Invalid word. Please try another</div>
+                  <!-- Search Button -->
+                   <button id="search" class="button is-primary is-fullwidth mt-2">
+                     Search
+                   </button>
+                 </div>
+               </div>
+             </div> 
+             <!--  Gif Display Card -->
+             <div class="card mt-3">
+               <div class="card-content">
+                 <p class="title is-5">Gif It!</p>
+                 <div>
+                   <!-- Placeholder for the gif that will be displayed after a word is searched -->
+                   <p id="gif-embed-slot" class="">
+                     Once you choose a word, a random gif for that word will appear
+                     here
+                   </p>
+                 </div>
+               </div>
+             </div>
+         </div>  
       </div>
       <!-- Main Content Section -->
-      <div class="main-content card ml-4">
+      <div class="main-content card">
         <header class="card-header">
           <p class="card-header-title">Word Info</p>
+            <!-- Related Words Modal Button (hidden at the beginning) -->
+            <div id="modal-button-wrapper" hidden>
+            <button
+                id="related-words-modal-button"
+                class="button is-primary mt-3 is-fullwidth"
+            >
+                Show Related Words
+            </button>
+            </div>
         </header>
         <div class="card-content">
           <p id="word-info">(definitions, example sentences, etc.)</p>
         </div>
       </div>
     </div>
+
     <!-- Modal for Displaying Related Words -->
     <div class="modal display-front" id="relatedWordsModal">
       <div class="modal-background"></div>
