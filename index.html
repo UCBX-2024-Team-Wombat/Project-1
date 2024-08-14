@@ -32,7 +32,7 @@
     <!-- Search Card -->    
         <div class="card">
           <div class="card-content">
-            <p class="title is-5">Search for a word!</p>
+            <p class="title is-5 has-text-centered">Search for a word!</p>
             <p>
               Type a word below and hit search. We'll return lots of fun data
               about the word
@@ -40,15 +40,14 @@
             <div>
               <!-- Input field for the word search -->
                <!-- Dropdown source from bulma: https://bulma.io/documentation/components/dropdown/ -->
-               <div class="dropdown" id="dropdown-wrapper">
+               <div class="dropdown is-fullwidth" id="dropdown-wrapper">
                 <div class="dropdown-trigger">
                     <input
-                    class="input mt-2 dropdown"
+                    class="input mt-2"
                     id="searched-word"
                     type="text"
                     placeholder="Type here..."
                   />
-                  </button>
                 </div>
                 <div class="dropdown-menu" id="dropdown-menu" role="menu">
                   <div class="dropdown-content dropdown-content-custom" id="search-history-dropdown-content">
