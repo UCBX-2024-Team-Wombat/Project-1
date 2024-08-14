@@ -2,6 +2,7 @@
 const searchInput = document.getElementById("searched-word");
 const searchButton = document.getElementById("search");
 const invalidWordNotice = document.getElementById('invalid-word-notice');
+const searchedWordsLocalStorageKey = 'searched-words';
 
 // Execution
 searchButton.addEventListener("click", handleSearch);
@@ -10,6 +11,7 @@ searchButton.addEventListener("click", handleSearch);
 function handleSearch(event) {
   const searchedWord = searchInput.value.trim();
   if(isValidWord(searchedWord)){
+    storeSearchedWord(searchedWord);
     hideInvalidWordNotice();
     resetPage();
     fetchRelatedWords(searchedWord);
@@ -41,4 +43,39 @@ function displayInvalidWordNotice(){
 
 function hideInvalidWordNotice(){
   invalidWordNotice.setAttribute('hidden', 'true');
+}
+
+function storeSearchedWord(word){
+
+  const searchHistory = retrieveSearchedWords();
+  // Add searched word to storage list
+  searchHistory.unshift(word);
+
+  // Remove any repeated searches
+  let indexToRemove;
+
+  for (let i = 1; i < searchHistory.length; i++) {
+    const pastWord = searchHistory[i];
+
+    if(word == pastWord){
+      indexToRemove = i;
+    }
+  }
+
+  if(indexToRemove != undefined){
+    searchHistory.splice(indexToRemove, 1);
+  }
+
+  // Set local storage to updated list
+  localStorage.setItem(searchedWordsLocalStorageKey, JSON.stringify(searchHistory));
+}
+
+// Return local
+function retrieveSearchedWords(){
+    // Retrieve local storage
+    const localStorageWords = localStorage.getItem(searchedWordsLocalStorageKey);
+    // Verify local storage is valid and array
+    const localStorageWordsValid = (localStorageWords != null && localStorageWords.includes('[')); 
+    // Return json parsed local storage if valid, otherwise empty array
+    return localStorageWordsValid ? JSON.parse(localStorageWords) : [];
 }
