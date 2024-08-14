@@ -79,6 +79,7 @@ function createUnorderedList(list, listTitle) {
       // Set text as anchor's inner text and custom data-word attribute to word
       anchor.innerText = stringValue;
       anchor.setAttribute("data-word", stringValue);
+      anchor.addEventListener('click', handleRelatedWordClicked);
 
       // append new elements to list
       listItem.appendChild(anchor);
@@ -93,6 +94,13 @@ function createUnorderedList(list, listTitle) {
   listWrapper.appendChild(unorderedList);
 
   return listWrapper;
+}
+
+function handleRelatedWordClicked(event){
+  // From modalHandler.js
+  closeModal();
+  // From index.js
+  handleWordClick(event);
 }
 
 // Utility methods for storing and retrieving giphy api key
