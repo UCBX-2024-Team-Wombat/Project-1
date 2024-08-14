@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', updateSearchHistoryDropdownContent
 
 // Functions
 function handleSearch(event) {
-  const searchedWord = searchInput.value.trim();
+  const searchedWord = searchInput.value.toLowerCase().trim();
 
   if(isValidWord(searchedWord)){
     storeSearchedWord(searchedWord);
@@ -40,6 +40,9 @@ function handleKeyDownInInput(event){
   if(key == 'Enter'){
     hideDropDown();
     handleSearch();
+  }
+  if(key == 'Escape'){
+    hideDropDown();
   }
   else {
     showDropDown();
