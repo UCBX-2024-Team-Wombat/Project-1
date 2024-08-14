@@ -111,27 +111,18 @@ function getDefinitions(wordInfo, wordObj) {
         // for each array value, check if that value has an array
         // of its own. Then loop through that array
         // (which has a mixed array value)
-        console.log("sseqArrayValue");
-        console.log(sseqArrayValue);
         for (const mixedValueArray of sseqArrayValue) {
           // mixedValueArray has both strings and objects.
           // We want the objects only
-          console.log("mixedValueArray");
-          console.log(mixedValueArray);
-
           if (mixedValueArray[0] == "sense") {
             // dt returns an array of strings.
             // The first string is a signifier, the second
             // is the actual definition.
             const dt = mixedValueArray[1]["dt"];
-            console.log("dt");
-            console.log(dt);
 
             for (const dtArrayValue of dt) {
               // If first value in dtArray is string "text",
               // get value in second index
-              console.log("dtArrayValue");
-              console.log(dtArrayValue);
               if (dtArrayValue[0] == "text") {
                 // regular expression created to remove excess notations for easier reading
                 wordObj.definition.push(

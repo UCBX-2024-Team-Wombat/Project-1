@@ -11,7 +11,7 @@ function fetchWordGif(word) {
     new URLSearchParams({
       api_key: getGiphyApiKey(),
       q: word,
-      limit: 25,
+      limit: 50,
       rating: "pg-13",
       lang: "en",
     }).toString();
