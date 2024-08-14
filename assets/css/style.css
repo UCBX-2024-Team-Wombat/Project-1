@@ -91,3 +91,8 @@ ul {
 .dropdown {
     display: inline;
 }
+
+.github-symbol {
+    height: 35px;
+    width: auto;
+}
