@@ -23,26 +23,14 @@ This project is a web application designed to enhance vocabulary exploration. Us
 * Random Gif: Retrieve and display a random gif associated with the word.
 * Synonyms & Antonyms in Modal: View a list of synonyms and antonyms displayed in a responsive modal.
 
-## 💽 Installation
+## 💽 APIs
 
-### Prerequisites
+In order for this site to function, three API keys must be set in local storage. This can be accomplished by running the following commands in the browser console:
+- storeGiphyApiKey('your-key-here');
+- storeThesaurusAPIKey('your-key-here');
+- storeWordInfoAPIKey('your-key-here');
 
-* Make sure you have **Node.js** installed.
-### Steps
-
-* 1. Clone the repository:
-
-git clone https://github.com/UCBX-2024-Team-Wombat/Project-1
-
-* 2. Navigate to the project directory: 
-
-cd yourproject
-
-* 3. Install dependencies:
-
-npm install
-
-* 4. npm start
+Instructor/Graders: The API keys for this site have been provided in the assignment comments section along with the repo hyperlink and git pages link.
 
 ## Usage
 
@@ -50,17 +38,7 @@ To use the application, open the index.html file in your browser. Input a word, 
 
 ##  🗄️ File Structure
 
-├── assets/
-│   ├── css/
-│   │   └── style.css
-│   ├── scripts/
-│   │   ├── index.js
-│   │   ├── modalHandler.js
-│   │   ├── relatedWordsHandler.js
-│   │   ├── wordFrequencyHandler.js
-│   │   └── wordGifHandler.js
-├── index.html
-└── README.md
+![File Structure](assets\images\file-structure.png "file-structure")
 
 ## Technology Used
 
@@ -70,6 +48,14 @@ To use the application, open the index.html file in your browser. Input a word, 
 * Bulma: CSS framework for styling
 * Node.js: For running scripts 
 * JSON, Thesaurus API,  GIPHY API 
+
+## 📷 Site Screenshot
+
+![File Structure](assets\images\site-screenshot.png "site-screenshot")
+
+## 🔗 Site Hyperlink
+
+https://ucbx-2024-team-wombat.github.io/Project-1/
 
 ## 🤝 Contributing
 If you wish to contribute to this project, please fork the repository and use a feature branch. Pull requests are warmly welcome.
