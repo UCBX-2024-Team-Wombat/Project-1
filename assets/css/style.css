@@ -185,7 +185,7 @@ ul {
 
 }
 
-@media (max-width: 500px){
+@media (max-width: 400px){
     /* Change to inline display at small scale */
     #related-words-display {
         display: inline;
