@@ -38,7 +38,7 @@ To use the application, open the index.html file in your browser. Input a word, 
 
 ##  🗄️ File Structure
 
-![File Structure](assets\images\file-structure.png "file-structure")
+![File Structure](./assets/images/file-structure.png "file-structure")
 
 ## Technology Used
 
@@ -51,7 +51,7 @@ To use the application, open the index.html file in your browser. Input a word, 
 
 ## 📷 Site Screenshot
 
-![File Structure](assets\images\site-screenshot.png "site-screenshot")
+![File Structure](./assets/images/site-screenshot.png "site-screenshot")
 
 ## 🔗 Site Hyperlink
 
