@@ -68,12 +68,16 @@ function resetPage() {
 
 // Validates that typed word uses only letters, hyphens, and apostraphes
 function isValidWord(word){
+  if(word.length > 0){
+    // Regex pattern derived from modification of pattern
+    // provided here: https://regex101.com/r/caXjPb/1
+    const pattern = /^(?:[a-z-']{2,}|-?)$/;
   
-  // Regex pattern derived from modification of pattern
-  // provided here: https://regex101.com/r/caXjPb/1
-  const pattern = /^(?:[a-z-']{2,}|-?)$/;
-
-  return pattern.test(word);
+    return pattern.test(word);
+  }
+  else {
+    return false;
+  }
 }
 
 // Removes 'hidden' attribute from invalid word notice element
