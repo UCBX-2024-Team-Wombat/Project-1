@@ -60,6 +60,7 @@ function createUnorderedList(list, listTitle) {
 
   // Create list title and append
   const listTitleDisplay = document.createElement("p");
+  listTitleDisplay.setAttribute('class', 'related-words-title');
   listTitleDisplay.innerText = listTitle;
   listWrapper.appendChild(listTitleDisplay);
 
@@ -73,17 +74,18 @@ function createUnorderedList(list, listTitle) {
     // Check for repeat synonyms (can occur as quirk of api)
     if (alreadySelectedWords.includes(stringValue) == false) {
       // Create parent list element
+      const anchor = document.createElement("a");
+      anchor.classList.add('related-word-list-item')
       const listItem = document.createElement("li");
       // Create anchor tag to indicate click-ability
-      const anchor = document.createElement("a");
       // Set text as anchor's inner text and custom data-word attribute to word
-      anchor.innerText = stringValue;
+      listItem.innerText = stringValue;
       anchor.setAttribute("data-word", stringValue);
       anchor.addEventListener('click', handleRelatedWordClicked);
 
       // append new elements to list
-      listItem.appendChild(anchor);
-      unorderedList.appendChild(listItem);
+      anchor.appendChild(listItem);
+      unorderedList.appendChild(anchor);
 
       // Add selected word to check list
       alreadySelectedWords.push(stringValue);
