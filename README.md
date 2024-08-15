@@ -46,8 +46,7 @@ To use the application, open the index.html file in your browser. Input a word, 
 * CSS3: For styling
 * JavaScript: For interactivity
 * Bulma: CSS framework for styling
-* Node.js: For running scripts 
-* JSON, Thesaurus API,  GIPHY API 
+* Merriam-Webster's Collegiate Dictionary with Audio, API Ninja Thesaurus API,  GIPHY API 
 
 ## 📷 Site Screenshot
 
@@ -55,7 +54,7 @@ To use the application, open the index.html file in your browser. Input a word, 
 
 ## 🔗 Site Hyperlink
 
-https://ucbx-2024-team-wombat.github.io/Project-1/
+https://ucbx-2024-team-wombat.github.io/WordNerd/
 
 ## 🤝 Contributing
 If you wish to contribute to this project, please fork the repository and use a feature branch. Pull requests are warmly welcome.
@@ -66,10 +65,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ##  🙌 Acknowledgments
 
-Thanks to Bulma for their great CSS framework, Merriam-Webster's Collegiate® Thesaurus, API Ninjas and Giphy Devolopers for their great API.
-
-Special thanks to any contributors or inspiration sources.
-
+Thanks to Bulma for their great CSS framework, Merriam-Webster's Collegiate® Dictionary with Audio, API Ninjas and Giphy Devolopers for their great API.
 
 
 
