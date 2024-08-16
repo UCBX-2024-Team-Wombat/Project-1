@@ -72,7 +72,7 @@ function createUnorderedList(list, listTitle) {
   // Loop through list of words
   for (const stringValue of list) {
     // Check for repeat synonyms (can occur as quirk of api)
-    if (alreadySelectedWords.includes(stringValue) == false) {
+    if (alreadySelectedWords.includes(stringValue) == false && isValidWord(stringValue)) {
       // Create parent list element
       const anchor = document.createElement("a");
       anchor.classList.add('related-word-list-item')
