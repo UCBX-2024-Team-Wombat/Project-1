@@ -11,7 +11,7 @@ function fetchWordGif(word) {
     new URLSearchParams({
       api_key: getGiphyApiKey(),
       q: word,
-      limit: 25,
+      limit: 50,
       rating: "pg-13",
       lang: "en",
     }).toString();
@@ -42,15 +42,26 @@ function fetchWordGif(word) {
 function renderGif(gifEmbedLink) {
   // Clear default text of embedSlot (provided by index.js)
   embedSlot.innerText = "";
+  
+  // Create new element
+  let gifElement;
 
-  // Create new embed element and populate with link
-  const embedElement = document.createElement("embed");
-  embedElement.src = gifEmbedLink;
-  embedElement.height = "100%";
-  embedElement.width = "100%";
+  if(gifEmbedLink == null){
+    gifElement = document.createElement("p");
+    gifElement.innerHTML = `Sorry, we couldn't find any gifs for that word`
+  }
+  else {
+  
+    // Create new embed element and populate with link
+    gifElement = document.createElement("embed");
+    gifElement.src = gifEmbedLink;
+    gifElement.height = "100%";
+    gifElement.width = "100%";
+  
+    // Append to render
+  }
 
-  // Append to render
-  embedSlot.appendChild(embedElement);
+  embedSlot.appendChild(gifElement);
 }
 
 // source: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
