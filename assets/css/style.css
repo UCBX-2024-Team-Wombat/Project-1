@@ -23,7 +23,7 @@ ul {
 #related-words-display div ul li {
     border-bottom: 1px solid gray;
 }
-
+/* Styles for the site header */
 .site-header {
     padding: 10px 20px; /* Adds padding around the header content */
     position: sticky;   /* Makes the header stick to the top of the page when scrolling */
